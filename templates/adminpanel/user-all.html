@@ -1,0 +1,116 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+{% block style_block %}
+    <style>
+        .notfound {
+            display: none;
+        }
+    </style>
+{% endblock %}
+{% block body_block %}
+    <form action="" method="GET">
+        <input type="search" class="form-control" placeholder="Search now" aria-label="search"
+               aria-describedby="search" style="border-radius: 5px" id='txt_searchall' required>
+    </form>
+
+    <div class="row mt-3 bg-white p-4">
+        <div class="col-md-12">
+            <h2 class="display-4">Registered Users:</h2>
+        </div>
+        <div class="col-md-12 table-responsive" style="overflow-y: auto; height: 100vh">
+            <table id="recent-purchases-listing" class="table table-striped table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Total Order Products</th>
+                    <th>Total Order Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td class="py-1">
+                            <img src="{{ user.user_profile.profile_pic.url }}" alt="image">
+                        </td>
+                        <td><a href="{% url "admin_app:single_user" user_pk=user.pk %}">{{ user.user_profile.full_name }}</a></td>
+                        <td>{{ user.user_profile.phone_one }}</td>
+                        <td><a href="{% url "admin_app:single_user" user_pk=user.pk %}">{{ user.email }}</a></td>
+                        <td>562</td>
+                        <td>9999</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+
+                <!-- Display this <tr> when no record found while search -->
+                <tr class='notfound'>
+                    <td colspan="7">No record found</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script_block %}
+    <script>
+        $(document).ready(function () {
+
+            // Search all columns
+            $('#txt_searchall').keyup(function () {
+                // Search Text
+                var search = $(this).val();
+
+                // Hide all table tbody rows
+                $('table tbody tr').hide();
+
+                // Count total search result
+                var len = $('table tbody tr:not(.notfound) td:contains("' + search + '")').length;
+
+                if (len > 0) {
+                    // Searching text in columns and show match row
+                    $('table tbody tr:not(.notfound) td:contains("' + search + '")').each(function () {
+                        $(this).closest('tr').show();
+                    });
+                } else {
+                    $('.notfound').show();
+                }
+
+            });
+
+            // Search on name column only
+            $('#txt_name').keyup(function () {
+                // Search Text
+                var search = $(this).val();
+
+                // Hide all table tbody rows
+                $('table tbody tr').hide();
+
+                // Count total search result
+                var len = $('table tbody tr:not(.notfound) td:nth-child(2):contains("' + search + '")').length;
+
+                if (len > 0) {
+                    // Searching text in columns and show match row
+                    $('table tbody tr:not(.notfound) td:contains("' + search + '")').each(function () {
+                        $(this).closest('tr').show();
+                    });
+                } else {
+                    $('.notfound').show();
+                }
+
+            });
+
+        });
+
+        // Case-insensitive searching (Note - remove the below script for Case sensitive search )
+        $.expr[":"].contains = $.expr.createPseudo(function (arg) {
+            return function (elem) {
+                return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+            };
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block style_block %}
+
+{% endblock %}
+{% block body_block %}
+
+
+
+    <form action="" method="POST" id="add" enctype="multipart/form-data">
+        {% for foo in form %}
+            {{ foo|crispy }}
+        {% endfor %}
+{#{{ form }}#}
+            <a href="{% url "admin_app:edit-products" product_pk=product_pk %}">Edit Product Details</a><br>
+        {% csrf_token %}
+        <button type="submit" id="submit" class="btn btn-primary mt-3">Edit Product</button>
+    </form>
+{% endblock %}
+
+{% block script_block %}
+{#    <script>#}
+{#        let fields = document.querySelectorAll('#id_product_image');#}
+{#        for (let i=0; i<fields.length; i++){#}
+{#            fields[i].setAttribute('name', `image_product-${i}-product_image`)#}
+{#            console.log(fields[i].getAttribute('name'))#}
+{#        }#}
+{#    </script>#}
+{% endblock %}

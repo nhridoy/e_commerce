@@ -1,0 +1,598 @@
+{% load static %}
+<!-- Menu Top Section -->
+<div class="flex w-full bg-gray-900 py-3">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between text-white text-xl">
+            <h2 class="font-semibold">Hello</h2>
+            <div class="flex gap-1 md:hidden">
+                <span class="relative profile-icon cursor-pointer">
+                    <i class="fal fa-user"></i>
+                    <div class="transition-all duration-200 profile-menu absolute right-0 top-7 text-xs text-gray-800 invisible opacity-0">
+                        <span class="flex flex-col bg-white border rounded-sm">
+                            <a href="" class="px-2 p-1 hover:bg-gray-200 active:bg-gray-300">Login</a>
+                            <a href="" class="px-2 p-1 hover:bg-gray-200 active:bg-gray-300">Register</a>
+                        </span>
+                    </div>
+                </span>
+                <span class="relative inline_block">
+                    <a href=""><i class="fal fa-heart"></i></a>
+                    <span class="absolute top-1 right-1 inline-flex items-center justify-center px-1 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">99</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Logo Section -->
+<div class="mt-1 relative">
+    <div class="container mx-auto flex items-center justify-between text-lg p-3">
+        <div class="block w-1/3 lg:hidden">
+            <nav class="cursor-pointer menu-bars">
+                <i class="fal fa-bars bar md:text-2xl"></i>
+            </nav>
+        </div>
+        <div class="block w-1/3 lg:w-1/4">
+            <a href="{% url 'ecom_app:index' %}" class="logo">
+                <img src="{% static 'home/images/logo5.png' %}" alt="Logo"
+                     class="object-cover lg:object-none w-full lg:w-max">
+            </a>
+        </div>
+        <div class="hidden w-full lg:block lg:w-2/4">
+            <form action="" class="flex">
+                <input placeholder="Search Here..." name="search" type="text"
+                       class="text-sm p-4 flex-1 rounded-r-none rounded-md outline-none border focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+                <button type="submit"
+                        class="hover:bg-yellow-400 rounded-l-none rounded-md flex-none text-white px-4 py-3 bg-yellow-300 inline-flex items-center justify-center">
+                    <i class="fal fa-search"></i> &nbsp; Search
+                </button>
+            </form>
+        </div>
+        <div class="flex justify-end w-1/3 lg:w-1/4">
+            <div class="flex gap-4">
+                <span class="relative profile-icon cursor-pointer md:block hidden">
+                    <i class="fal fa-user"></i>
+                    <div class="transition-all duration-200 profile-menu absolute right-0 top-7 text-xs text-gray-800  invisible opacity-0">
+                        <span class="flex flex-col bg-white border rounded-sm">
+                            <a href="" class="px-2 p-1 hover:bg-gray-200 active:bg-gray-300">Login</a>
+                            <a href="" class="px-2 p-1 hover:bg-gray-200 active:bg-gray-300">Register</a>
+                        </span>
+                    </div>
+                </span>
+                <span class="relative inline_block md:block hidden">
+                    <a href="" data-tootik="Wishlist"><i class="fal fa-heart"></i></a>
+                    <span class="top-0 right-0 bg-red-600 absolute text-white text-xs px-1 font-bold inline-flex items-center justify-center rounded-full leading-none transform translate-x-1/3">20</span>
+                </span>
+                <span class="relative inline-block">
+                    <i class="fal fa-shopping-cart"></i>
+                    <span class="top-0 right-0 bg-red-600 absolute text-white text-xs px-1 font-bold inline-flex items-center justify-center rounded-full leading-none transform translate-x-1/3">20</span>
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- Logo Bottom Section -->
+<div class="flex w-full bg-gray-900 py-3 lg:hidden">
+    <div class="container mx-auto px-4">
+        <form action="" class="flex">
+            <input placeholder="Search Here..." name="search" type="text"
+                   class="text-sm p-1 flex-1 rounded-r-none outline-none border-transparent focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent">
+            <button type="submit"
+                    class="hover:bg-yellow-400 rounded-l-none flex-none text-white font-bold px-2 bg-yellow-300 inline-flex items-center justify-center">
+                <i class="fal fa-search"></i></button>
+        </form>
+    </div>
+</div>
+<!-- Desktop Menu Bar -->
+<div class="hidden w-full bg-gray-900 lg:flex sticky top-0 z-10">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center gap-10">
+            <div class="relative bg-yellow-300 hover:bg-yellow-400 transition duration-300 h-full">
+                <div class="desktop-menu flex gap-4 items-center px-3 py-3 cursor-pointer">
+                    <div class="desktop-menu-bars">
+                        <i class="fal fa-bars bar md:text-2xl"></i>
+                    </div>
+                    <div class="">
+                        <h2 class="capitalize text-xl leading-none font-bold">All Categories</h2>
+                    </div>
+                    <div class="text-lg">
+                        <i class="far fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <!-- Category Menu Section Desktop -->
+                <div class="absolute bg-yellow-400 z-10 transition-all ease-in-out duration-300 menu-items top-full h-0 left-0 w-full lg:overflow-auto top-100 px-6">
+
+                    <div class="flex justify-end p-2">
+                        <i class="fal fa-times text-lg cross-2 cursor-pointer"></i>
+                    </div>
+                    <div class="menu overflow-y-auto h-full">
+                        <div class="">
+                            <div class="topmenus cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                                <div class="">Electronic Devices</div>
+                                <div class=""><i class="far fa-chevron-down down-arrows"></i></div>
+                            </div>
+                            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenus">
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="topmenus cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                                <div class="">Electronic Devices</div>
+                                <div class=""><i class="far fa-chevron-down down-arrows"></i></div>
+                            </div>
+                            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenus">
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="topmenus cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                                <div class="">Electronic Devices</div>
+                                <div class=""><i class="far fa-chevron-down down-arrows"></i></div>
+                            </div>
+                            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenus">
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="topmenus cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                                <div class="">Electronic Devices</div>
+                                <div class=""><i class="far fa-chevron-down down-arrows"></i></div>
+                            </div>
+                            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenus">
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="topmenus cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                                <div class="">Electronic Devices</div>
+                                <div class=""><i class="far fa-chevron-down down-arrows"></i></div>
+                            </div>
+                            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenus">
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="topmenus cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                                <div class="">Electronic Devices</div>
+                                <div class=""><i class="far fa-chevron-down down-arrows"></i></div>
+                            </div>
+                            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenus">
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="topmenus cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                                <div class="">Electronic Devices</div>
+                                <div class=""><i class="far fa-chevron-down down-arrows"></i></div>
+                            </div>
+                            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenus">
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="topmenus cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                                <div class="">Electronic Devices</div>
+                                <div class=""><i class="far fa-chevron-down down-arrows"></i></div>
+                            </div>
+                            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenus">
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="topmenus cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                                <div class="">Electronic Devices</div>
+                                <div class=""><i class="far fa-chevron-down down-arrows"></i></div>
+                            </div>
+                            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenus">
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="topmenus cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                                <div class="">Electronic Devices</div>
+                                <div class=""><i class="far fa-chevron-down down-arrows"></i></div>
+                            </div>
+                            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenus">
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="topmenus cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                                <div class="">Electronic Devices</div>
+                                <div class=""><i class="far fa-chevron-down down-arrows"></i></div>
+                            </div>
+                            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenus">
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                                <a href=""
+                                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                                    Devices</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <a href=""
+               class="text-lg text-white block hover:text-yellow-300 focus:text-yellow-300 focus:outline-none transition duration-300">Menu</a>
+            <a href=""
+               class="text-lg text-white block hover:text-yellow-300 focus:text-yellow-300 focus:outline-none transition duration-300">Menu</a>
+            <a href=""
+               class="text-lg text-white block hover:text-yellow-300 focus:text-yellow-300 focus:outline-none transition duration-300">Menu</a>
+            <a href=""
+               class="text-lg text-white block hover:text-yellow-300 focus:text-yellow-300 focus:outline-none transition duration-300">Menu</a>
+            <a href=""
+               class="text-lg text-white block hover:text-yellow-300 focus:text-yellow-300 focus:outline-none transition duration-300">Menu</a>
+            <a href=""
+               class="text-lg text-white block hover:text-yellow-300 focus:text-yellow-300 focus:outline-none transition duration-300">Menu</a>
+        </div>
+    </div>
+</div>
+<!-- Category Menu Section Mobile -->
+<div class="bg-yellow-400 fixed top-0 -left-0.5 w-10/12 h-full z-10 transform-gpu -translate-x-full transition-all ease-in-out duration-300 menu-item lg:invisible">
+    <div class="flex justify-end p-2">
+        <i class="fal fa-times text-lg cross cursor-pointer"></i>
+    </div>
+    <div class="menu overflow-y-auto h-full">
+        <div class="">
+            <div class="topmenu cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                <div class="">Electronic Devices</div>
+                <div class=""><i class="far fa-chevron-down down-arrow"></i></div>
+            </div>
+            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenu">
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+            </div>
+        </div>
+        <div class="">
+            <div class="topmenu cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                <div class="">Electronic Devices</div>
+                <div class=""><i class="far fa-chevron-down down-arrow"></i></div>
+            </div>
+            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenu">
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+            </div>
+        </div>
+        <div class="">
+            <div class="topmenu cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                <div class="">Electronic Devices</div>
+                <div class=""><i class="far fa-chevron-down down-arrow"></i></div>
+            </div>
+            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenu">
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+            </div>
+        </div>
+        <div class="">
+            <div class="topmenu cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                <div class="">Electronic Devices</div>
+                <div class=""><i class="far fa-chevron-down down-arrow"></i></div>
+            </div>
+            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenu">
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+            </div>
+        </div>
+        <div class="">
+            <div class="topmenu cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                <div class="">Electronic Devices</div>
+                <div class=""><i class="far fa-chevron-down down-arrow"></i></div>
+            </div>
+            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenu">
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+            </div>
+        </div>
+        <div class="">
+            <div class="topmenu cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                <div class="">Electronic Devices</div>
+                <div class=""><i class="far fa-chevron-down down-arrow"></i></div>
+            </div>
+            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenu">
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+            </div>
+        </div>
+        <div class="">
+            <div class="topmenu cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                <div class="">Electronic Devices</div>
+                <div class=""><i class="far fa-chevron-down down-arrow"></i></div>
+            </div>
+            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenu">
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+            </div>
+        </div>
+        <div class="">
+            <div class="topmenu cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                <div class="">Electronic Devices</div>
+                <div class=""><i class="far fa-chevron-down down-arrow"></i></div>
+            </div>
+            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenu">
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+            </div>
+        </div>
+        <div class="">
+            <div class="topmenu cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                <div class="">Electronic Devices</div>
+                <div class=""><i class="far fa-chevron-down down-arrow"></i></div>
+            </div>
+            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenu">
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+            </div>
+        </div>
+        <div class="">
+            <div class="topmenu cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                <div class="">Electronic Devices</div>
+                <div class=""><i class="far fa-chevron-down down-arrow"></i></div>
+            </div>
+            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenu">
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+            </div>
+        </div>
+        <div class="">
+            <div class="topmenu cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                <div class="">Electronic Devices</div>
+                <div class=""><i class="far fa-chevron-down down-arrow"></i></div>
+            </div>
+            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenu">
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+            </div>
+        </div>
+        <div class="">
+            <div class="topmenu cursor-pointer block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-3 py-2 transition border-b flex items-center justify-between">
+                <div class="">Electronic Devices</div>
+                <div class=""><i class="far fa-chevron-down down-arrow"></i></div>
+            </div>
+            <div class="transition-all duration-500 ease-in-out max-h-0 overflow-hidden submenu">
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+                <a href=""
+                   class="block hover:bg-yellow-500 focus:bg-yellow-500 outline-none px-7 py-2 transition border-b">Electronic
+                    Devices</a>
+            </div>
+        </div>
+
+
+    </div>
+</div>

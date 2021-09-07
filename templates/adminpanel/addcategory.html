@@ -1,0 +1,234 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block style_block %}
+    <style>
+        .notfound {
+            display: none;
+        }
+    </style>
+{% endblock %}
+{% block body_block %}
+    <div id="mod"></div>
+    <form id="add" method="POST">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <button type="submit" class="mt-md-0 mt-3 btn btn-primary">Add Category</button>
+    </form>
+
+    <div class="alert"></div>
+
+    <form action="" method="GET" class="mt-3">
+        <input type="search" class="form-control" placeholder="Search now" aria-label="search"
+               aria-describedby="search" style="border-radius: 5px" id='txt_searchall' required>
+    </form>
+
+
+    <div class="bg-white mt-4 table-responsive" style="overflow: auto; height: 80vh;">
+        <table id="myTable" class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Edit Name</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody id="empty">
+
+
+            </tbody>
+            <!-- Display this <tr> when no record found while search -->
+            <tr class='notfound'>
+                <td colspan="8">No record found</td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}
+
+{% block script_block %}
+
+    <script>
+        // Searching Option
+        $(document).ready(function () {
+
+            // Search all columns
+            $('#txt_searchall').keyup(function () {
+                // Search Text
+                var search = $(this).val();
+
+                // Hide all table tbody rows
+                $('table tbody #search-tr').hide();
+
+                // Count total search result
+                var len = $('table tbody #search-tr:not(.notfound) td:contains("' + search + '")').length;
+
+                if (len > 0) {
+                    // Searching text in columns and show match row
+                    $('table tbody #search-tr:not(.notfound) td:contains("' + search + '")').each(function () {
+                        $(this).closest('#search-tr').show();
+                        $('.notfound').hide();
+                    });
+                } else {
+                    $('.notfound').show();
+                }
+
+            });
+
+        });
+
+        // Case-insensitive searching (Note - remove the below script for Case sensitive search )
+        $.expr[":"].contains = $.expr.createPseudo(function (arg) {
+            return function (elem) {
+                return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+            };
+        });
+    </script>
+    <script>
+        // Showing Items in Table on page load from server
+        $(document).ready(function () {
+            $.ajax({
+                        type: 'GET',
+                        url: "{% url 'admin_app:view-categories' %}",
+                        success: function (response) {
+                            $('#empty').empty();
+                            $('#mod').empty();
+                            for (var key in response.data) {
+                                let temp = `<tr id="search-tr"><th scope="row">${parseInt(key) + 1}</th><td>${response.data[key].id}</td><td>${response.data[key].category_name}</td><td><button type="submit" title="Edit" class="btn" data-bs-toggle="modal" data-bs-target="#cat${response.data[key].id}"><i class="mdi mdi-pencil-box"></i></button></td><td><a href="/adminpanel/deletecategories/${response.data[key].id}" class="btn" title="Delete" id="delete"><i class="mdi mdi-delete text-danger"></i></a></td></tr>`
+
+                                let mod = `<div class="modal fade" id="cat${response.data[key].id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <form action="/adminpanel/editcategories/${response.data[key].id}/" method="POST">
+                                                <input type="text" class="form-control" name="cat-edit" placeholder="Enter New Name" value="${response.data[key].category_name}" required>
+                                                {% csrf_token %}
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                                </div>
+
+                                            </form>
+                                          </div>
+
+                                        </div>
+                                      </div>
+                                    </div>`;
+
+                                $('#mod').append(mod);
+                                $('#empty').append(temp);
+                            }
+                        },
+                        error: function (response) {
+                            console.log('Nothing')
+                        }
+                    });
+
+        })
+
+        // Form Submitting without page loading
+        $("#add").submit(function (e) {
+            // prevent from normal form behaviour
+            e.preventDefault();
+            // serialize the form data
+            var serializedData = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'admin_app:add-categories' %}",
+                data: serializedData,
+                success: function (response) {
+                    //reset the form after successful submit
+                    $("#add")[0].reset();
+
+                    // Showing Item to the table after form submitting from server
+                    $.ajax({
+                        type: 'GET',
+                        url: "{% url 'admin_app:view-categories' %}",
+                        success: function (response) {
+                            $('#empty').empty();
+                            $('#mod').empty();
+                            for (var key in response.data) {
+                                let temp = `<tr id="search-tr"><th scope="row">${parseInt(key) + 1}</th><td>${response.data[key].id}</td><td>${response.data[key].category_name}</td><td><button type="submit" title="Edit" class="btn" data-bs-toggle="modal" data-bs-target="#cat${response.data[key].id}"><i class="mdi mdi-pencil-box"></i></button></td><td><a href="/adminpanel/deletecategories/${response.data[key].id}" class="btn" title="Delete" id="delete"><i class="mdi mdi-delete text-danger"></i></a></td></tr>`
+
+                                let mod = `<div class="modal fade" id="cat${response.data[key].id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <form action="/adminpanel/editcategories/${response.data[key].id}/" method="POST">
+                                                <input type="text" class="form-control" name="cat-edit" placeholder="Enter New Name" value="${response.data[key].category_name}" required>
+                                                {% csrf_token %}
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                                </div>
+
+                                            </form>
+                                          </div>
+
+                                        </div>
+                                      </div>
+                                    </div>`;
+
+                                $('#mod').append(mod);
+                                $('#empty').append(temp);
+                            }
+                        },
+                        error: function (response) {
+                            console.log('Nothing')
+                        }
+                    });
+
+
+                },
+                error: function (response) {
+                    console.log(response)
+                }
+            });
+
+            // Validating if the item already exists
+            $.ajax({
+                type: 'POST',
+                data: $(this).serialize(), // get the form data
+                url: "{% url 'admin_app:val-categories' %}",
+                // on success
+                success: function (response) {
+                    if (response.exists === true) {
+                        $('.alert').empty()
+                        $('.alert').removeClass('alert-success')
+                        $('.alert').addClass('alert-danger').append('Item Already Exists')
+                        setTimeout(function () {
+                            $('.alert').empty()
+                            $('.alert').removeClass('alert-danger')
+                        }, 1000)
+                    } else {
+                        $('.alert').empty()
+                        $('.alert').removeClass('alert-danger')
+                        $('.alert').addClass('alert-success').append('Item Added Successfully')
+                        setTimeout(function () {
+                            $('.alert').empty()
+                            $('.alert').removeClass('alert-success')
+                        }, 1000)
+
+                    }
+
+                },
+                // on error
+                error: function (response) {
+                    // alert the error if any error occured
+                    console.log(response.responseJSON.errors)
+                }
+            });
+        });
+    </script>
+
+{% endblock %}

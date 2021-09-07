@@ -1,0 +1,109 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+{% block body_block %}
+    <div class="bg-white p-4 container-fluid" id="order-details">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="logo">
+                    <img src="{% static "adminpanel/images/logo.svg" %}" alt="">
+                </div>
+                <address class="mt-2">
+                    <p class="font-weight-bold">Company Name</p>
+                    <p>Company Phone: <span class="text-primary">111111</span></p>
+                    <p>Company Email: <span class="text-primary">company@company.com</span></p>
+                    <p>Company Address: <span class="text-primary">Dhanmoni, Dhaka</span></p>
+                </address>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end flex-column align-items-end">
+                <h4 class="display-4">Full Name</h4>
+                <address class="mt-2 d-flex justify-content-end flex-column align-items-end">
+                    <p>Billing Phone: <span class="text-primary">111111</span></p>
+                    <p>Billing Email: <span class="text-primary">company@company.com</span></p>
+                    <p>Billing Address: <span class="text-primary">Dhanmoni, Dhaka</span></p>
+                </address>
+                <address class="mt-2 d-flex justify-content-end flex-column align-items-end">
+                    <p>Shipping Phone: <span class="text-primary">111111</span></p>
+                    <p>Shipping Email: <span class="text-primary">company@company.com</span></p>
+                    <p>Shipping Address: <span class="text-primary">Dhanmoni, Dhaka</span></p>
+                </address>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="display-4">Order Details</h2>
+            <p>Order ID: 451234051</p>
+            </div>
+            <div class="col-md-6">
+            <p><b>Date: </b>5 July 2020</p>
+            </div>
+
+
+            <div class="col-md-12 table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <th>No</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Unit Price</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td><img src="{% static "adminpanel/images/img.jpg" %}" alt=""></td>
+                        <td>Laptop</td>
+                        <td>500</td>
+                        <td>5</td>
+                        <td>2500</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td><img src="{% static "adminpanel/images/img.jpg" %}" alt=""></td>
+                        <td>Phone</td>
+                        <td>100</td>
+                        <td>5</td>
+                        <td>500</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"></td>
+                        <td>Total:</td>
+                        <td>3000</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"></td>
+                        <td>Shipping:</td>
+                        <td>30</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"></td>
+                        <td>Discount:</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"></td>
+                        <td><b>Grand Total:</b>:</td>
+                        <td>2930</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <h6 class="mt-2">Paid Via Bkash</h6><span>(Payment ID: 456123489)</span>
+    <h6 class="mt-2">Cancellation Reason: </h6><span>Unpaid</span>
+    </div>
+    <div class="text-center">
+    <button class="btn btn-primary btn-rounded btn-sm mt-4" onclick="p()">Print</button>
+    </div>
+
+{% endblock %}
+
+{% block script_block %}
+    <script>
+        function p(){
+            item = document.querySelector('#order-details');
+            print(item);
+            console.log(item)
+        }
+    </script>
+{% endblock %}

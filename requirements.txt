@@ -1,0 +1,10 @@
+django~=3.2.6
+pillow # Image Displaying
+django-crispy-forms # Form Maintenance at clintside
+django-cleanup # Delete duplicate file after updating
+django-resized # Resizing image before uploading
+django-summernote # Adding Markdown Support
+# django-multiselectfield # Multiple Choice Field
+# django-forms-fieldset # Adding Fieldsets to form as like as admin
+
+bleach~=3.3.0

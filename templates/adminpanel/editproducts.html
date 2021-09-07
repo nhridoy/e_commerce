@@ -1,0 +1,25 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block style_block %}
+
+{% endblock %}
+{% block body_block %}
+
+
+{{ current_product.product_description|safe }}
+    <form action="" method="POST" id="add" enctype="multipart/form-data">
+        {{ form|crispy }}
+{#        {% for image_form in form2 %}#}
+{#            {{ image_form|crispy }}#}
+{#        {% endfor %}#}
+        {% csrf_token %}
+        <a href="{% url "admin_app:edit-products-images" product_pk=product_pk %}">Edit Product Images</a><br>
+        <button type="submit" id="submit" class="btn btn-primary mt-3">Edit Product</button>
+    </form>
+{% endblock %}
+
+{% block script_block %}
+
+{% endblock %}

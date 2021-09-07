@@ -1,0 +1,276 @@
+{% extends 'adminpanel/base.html' %}
+{% block body_block %}
+
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="p-3">
+                    Summery
+                </div>
+                <div class="grid">
+                    <a class="grid-item bg-dribbble" href="{% url "admin_app:all_user" %}">
+                        <i class="mdi mdi-account"></i>
+                        <div class="p-2">
+                            <span>Total User:</span>
+                            <span class="number">{{ users.count }}</span>
+                        </div>
+                    </a>
+                    <a class="grid-item bg-facebook" href="{% url "admin_app:order" %}">
+                        <i class="mdi mdi-basket-fill"></i>
+                        <div class="p-2">
+                            <span>Total Order:</span>
+                            <span class="number">999999</span>
+                        </div>
+                    </a>
+                    <a class="grid-item bg-github" href="">
+                        <i class="mdi mdi-cart-plus"></i>
+                        <div class="p-2">
+                            <span>Pending Order:</span>
+                            <span class="number">999999</span>
+                        </div>
+                    </a>
+                    <a class="grid-item bg-google" href="">
+                        <i class="mdi mdi-cart-outline"></i>
+                        <div class="p-2">
+                            <span>Return Request:</span>
+                            <span class="number">999999</span>
+                        </div>
+                    </a>
+                    <a class="grid-item bg-behance" href="">
+                        <i class="mdi mdi-cart-outline"></i>
+                        <div class="p-2">
+                            <span>Canceled Order:</span>
+                            <span class="number">999999</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body dashboard-tabs p-0">
+                    <ul class="nav nav-tabs px-4" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="sales-tab" data-toggle="tab" href="#sales" role="tab"
+                               aria-controls="sales" aria-selected="true">Sales</a>
+                        </li>
+
+
+                    </ul>
+                    <div class="tab-content py-0 px-0">
+                        <div class="tab-pane fade show active" id="sales" role="tabpanel" aria-labelledby="sales-tab">
+                            <div class="d-flex flex-wrap justify-content-xl-between">
+                                <div
+                                        class="d-none d-xl-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                    <i class="mdi mdi-calendar-heart icon-lg mr-3 text-primary"></i>
+                                    <div class="d-flex flex-column justify-content-around">
+                                        <h5 class="mb-0 d-inline-block">Jul 2018</h5>
+
+                                    </div>
+                                </div>
+                                <div
+                                        class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                    <i class="mdi mdi-currency-usd mr-3 icon-lg text-danger"></i>
+                                    <div class="d-flex flex-column justify-content-around">
+                                        <small class="mb-1 text-muted">Purchases</small>
+                                        <h5 class="mr-2 mb-0">$577545</h5>
+                                    </div>
+                                </div>
+                                <div
+                                        class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                    <i class="mdi mdi-currency-usd mr-3 icon-lg text-warning"></i>
+                                    <div class="d-flex flex-column justify-content-around">
+                                        <small class="mb-1 text-muted">Sales</small>
+                                        <h5 class="mr-2 mb-0">$577545</h5>
+                                    </div>
+                                </div>
+                                <div
+                                        class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                    <i class="mdi mdi-currency-usd mr-3 icon-lg text-success"></i>
+                                    <div class="d-flex flex-column justify-content-around">
+                                        <small class="mb-1 text-muted">Revenue</small>
+                                        <h5 class="mr-2 mb-0">$577545</h5>
+                                    </div>
+                                </div>
+                                <div
+                                        class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                    <i class="mdi mdi-account-multiple-plus mr-3 icon-lg text-danger"></i>
+                                    <div class="d-flex flex-column justify-content-around">
+                                        <small class="mb-1 text-muted">New User</small>
+                                        <h5 class="mr-2 mb-0">3497843</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-7 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title">Cash deposits</p>
+                    <p class="mb-4">To start a blog, think of a topic about and first brainstorm party is ways to write
+                        details</p>
+                    <div id="cash-deposits-chart-legend" class="d-flex justify-content-center pt-3"></div>
+                    <canvas id="cash-deposits-chart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title">Total purchases</p>
+                    <h1>$ 28835</h1>
+                    <h4>Gross purchases over the years</h4>
+                    <p class="text-muted">Today, many people rely on computers to do homework, work, and create or store
+                        useful information. Therefore, it is important </p>
+                    <div id="total-purchases-chart-legend"></div>
+                </div>
+                <canvas id="total-purchases-chart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title">Recent Purchases</p>
+                    <div class="table-responsive" style="overflow: auto; height: 100vh">
+                        <table id="recent-purchases-listing" class="table table-bordered table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Order ID</th>
+                                <th>User Email</th>
+                                <th>Date</th>
+                                <th>Products</th>
+                                <th>Total Price</th>
+                                <th>Payment Status</th>
+                                <th>Delivery Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr id="search-tr">
+                                <th scope="row">1</th>
+                                <td><a href="{% url "admin_app:order_details" %}">95623</a></td>
+                                <td><a href="">email@email.email</a></td>
+                                <td>5 June 2020</td>
+                                <td>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                </td>
+                                <td>50000</td>
+                                <td><span class="badge badge-success" style="border-radius: 5px;">Paid</span></td>
+                                <td><span class="badge badge-success" style="border-radius: 5px;">Delivered</span></td>
+                            </tr>
+                            <tr id="search-tr">
+                                <th scope="row">1</th>
+                                <td><a href="{% url "admin_app:order_details" %}">95623</a></td>
+                                <td><a href="">email@email.email</a></td>
+                                <td>5 June 2020</td>
+                                <td>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                </td>
+                                <td>50000</td>
+                                <td><span class="badge badge-warning" style="border-radius: 5px;">UnPaid</span></td>
+                                <td><span class="badge badge-info" style="border-radius: 5px;">Processing</span></td>
+                            </tr>
+                            <tr id="search-tr">
+                                <th scope="row">1</th>
+                                <td><a href="{% url "admin_app:order_details" %}">95623</a></td>
+                                <td><a href="">email@email.email</a></td>
+                                <td>5 June 2020</td>
+                                <td>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                </td>
+                                <td>50000</td>
+                                <td><span class="badge badge-warning" style="border-radius: 5px;">UnPaid</span></td>
+                                <td><span class="badge badge-warning" style="border-radius: 5px;">Cancelled</span></td>
+                            </tr>
+                            <tr id="search-tr">
+                                <th scope="row">1</th>
+                                <td><a href="{% url "admin_app:order_details" %}">95623</a></td>
+                                <td><a href="">email@email.email</a></td>
+                                <td>5 June 2020</td>
+                                <td>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                </td>
+                                <td>50000</td>
+                                <td><span class="badge badge-danger" style="border-radius: 5px;">Failed</span></td>
+                                <td><span class="badge badge-warning" style="border-radius: 5px;">Cancelled</span></td>
+                            </tr>
+                            <tr id="search-tr">
+                                <th scope="row">1</th>
+                                <td><a href="{% url "admin_app:order_details" %}">95623</a></td>
+                                <td><a href="">email@email.email</a></td>
+                                <td>5 June 2020</td>
+                                <td>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                </td>
+                                <td>50000</td>
+                                <td><span class="badge badge-outline-danger" style="border-radius: 5px;">Refund Requested</span>
+                                </td>
+                                <td><span class="badge badge-outline-danger" style="border-radius: 5px;">Return Requested</span>
+                                </td>
+                            </tr>
+                            <tr id="search-tr">
+                                <th scope="row">1</th>
+                                <td><a href="{% url "admin_app:order_details" %}">95623</a></td>
+                                <td><a href="">email@email.email</a></td>
+                                <td>5 June 2020</td>
+                                <td>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                </td>
+                                <td>50000</td>
+                                <td><span class="badge badge-danger" style="border-radius: 5px;">Refunded</span></td>
+                                <td><span class="badge badge-danger" style="border-radius: 5px;">Returned</span></td>
+                            </tr>
+                            <tr id="search-tr">
+                                <th scope="row">1</th>
+                                <td><a href="{% url "admin_app:order_details" %}">95623</a></td>
+                                <td><a href="">email@email.email</a></td>
+                                <td>5 June 2020</td>
+                                <td>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                    3 x laptop BDT-5000(BDT-500)<br>
+                                </td>
+                                <td>50000</td>
+                                <td><span class="badge badge-success" style="border-radius: 5px;">Paid</span></td>
+                                <td><span class="badge badge-info" style="border-radius: 5px;">Processing</span></td>
+                            </tr>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

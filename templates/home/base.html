@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title_block %}
+        Ecommerce - HomePage
+    {% endblock %}</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "home/fonts/css/all.min.css" %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;1,400&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://npmcdn.com/tootik@1.0.2/css/tootik.min.css">
+    <link rel="stylesheet" href="{% static 'home/css/jquery.exzoom.css' %}">
+    {% block style_block %}
+        <style>
+            html {
+                scroll-behavior: smooth;
+            }
+
+            .height-full {
+                height: 100%;
+                opacity: 1;
+            }
+        </style>
+    {% endblock %}
+</head>
+<body class="text-gray-800 text-sm transition tracking-wide" style="font-family: 'Poppins', sans-serif;">
+<!-- Header Section Starts -->
+{% include 'home/header.html' %}
+<!-- Header Section Ends -->
+<div class="container mx-auto px-4 my-8">
+    {% block body_block %}
+
+    {% endblock %}
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript" src="{% static 'home/js/jquery.exzoom.js' %}"></script>
+<script>
+    let profile = document.querySelectorAll('.profile-icon');
+    for (let i = 0; i < profile.length; i++) {
+        let profile_menu = profile[i].lastElementChild;
+        profile[i].addEventListener('click', (e) => {
+            profile_menu.classList.toggle('invisible');
+            profile_menu.classList.toggle('height-full');
+            {#profile_menu.classList.toggle('h-100')#}
+            profile_menu.classList.toggle('opacity-0');
+        })
+    }
+</script>
+<script>
+    // For Mobile Menu
+    let menu = document.querySelector('.menu-bars');
+    let menu_item = document.querySelector('.menu-item');
+    let cross = document.querySelector('.cross');
+    menu.addEventListener('click', (e) => {
+        if (menu_item.classList.contains('-translate-x-full')) {
+            menu_item.classList.remove('-translate-x-full');
+            menu_item.classList.remove('invisible');
+        } else {
+            menu_item.classList.add('-translate-x-full');
+            menu_item.classList.add('invisible');
+        }
+    })
+    cross.addEventListener('click', (e) => {
+        if (!menu_item.classList.contains('-translate-x-full')) {
+            menu_item.classList.add('-translate-x-full');
+        }
+    })
+</script>
+<script>
+    // For Desktop Menu
+    let desktop_menu = document.querySelector('.desktop-menu');
+    let desktop_menu_arrow = desktop_menu.lastElementChild.firstElementChild;
+    let menu_items = document.querySelector('.menu-items');
+    let cross_2 = document.querySelector('.cross-2');
+    desktop_menu.addEventListener('click', (e) => {
+        desktop_menu.classList.toggle('bg-yellow-400');
+        if (menu_items.classList.contains('h-0')) {
+            menu_items.classList.remove('h-0');
+            menu_items.classList.add('h-auto');
+            desktop_menu_arrow.classList.remove('fa-chevron-down')
+            desktop_menu_arrow.classList.add('fa-chevron-up')
+        } else {
+            menu_items.classList.remove('h-auto');
+            menu_items.classList.add('h-0');
+            desktop_menu_arrow.classList.remove('fa-chevron-up')
+            desktop_menu_arrow.classList.add('fa-chevron-down')
+        }
+
+    })
+    cross_2.addEventListener('click', (e) => {
+        if (menu_items.classList.contains('h-auto')) {
+            menu_items.classList.remove('h-auto');
+            menu_items.classList.add('h-0');
+            desktop_menu.classList.toggle('bg-yellow-400');
+            desktop_menu_arrow.classList.remove('fa-chevron-up')
+            desktop_menu_arrow.classList.add('fa-chevron-down')
+        }
+    })
+
+    // For Menu Items
+    let topmenus = menu_items.lastElementChild.children;
+    for (let i = 0; i < topmenus.length; i++) {
+        topmenus[i].addEventListener('click', (e) => {
+            let submenus = topmenus[i].lastElementChild;
+            let arrows = topmenus[i].firstElementChild.lastElementChild.firstElementChild;
+            {#console.log(submenus.parentElement)#}
+            if (submenus.classList.contains('max-h-0')) {
+                topmenus[i].classList.toggle('bg-yellow-500');
+                submenus.classList.remove('max-h-0');
+                submenus.classList.add('max-h-96');
+            } else {
+                topmenus[i].classList.toggle('bg-yellow-500');
+                submenus.classList.remove('max-h-96');
+                submenus.classList.add('max-h-0');
+            }
+            if (arrows.classList.contains('fa-chevron-down')) {
+                arrows.classList.remove('fa-chevron-down');
+                arrows.classList.add('fa-chevron-up');
+            } else {
+                arrows.classList.remove('fa-chevron-up');
+                arrows.classList.add('fa-chevron-down');
+            }
+        })
+    }
+
+</script>
+<script>
+    let topmenu = document.querySelectorAll('.topmenu');
+    for (let i = 0; i < topmenu.length; i++) {
+        topmenu[i].addEventListener('click', (e) => {
+            let submenu = topmenu[i].nextElementSibling;
+            let arrow = topmenu[i].lastElementChild.lastElementChild;
+            if (submenu.classList.contains('max-h-0')) {
+                submenu.classList.remove('max-h-0');
+                submenu.classList.add('max-h-96');
+            } else {
+                submenu.classList.remove('max-h-96');
+                submenu.classList.add('max-h-0');
+            }
+            if (arrow.classList.contains('fa-chevron-down')) {
+                arrow.classList.remove('fa-chevron-down');
+                arrow.classList.add('fa-chevron-up');
+            } else {
+                arrow.classList.remove('fa-chevron-up');
+                arrow.classList.add('fa-chevron-down');
+            }
+        })
+    }
+
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function (event) {
+        if (!event.target.matches('.topmenu')) {
+            var dropdowns = document.getElementsByClassName("submenu");
+            var downarrow = document.getElementsByClassName("down-arrow");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('max-h-96')) {
+                    openDropdown.classList.remove('max-h-96');
+                    openDropdown.classList.add('max-h-0');
+                }
+            }
+            for (let j = 0; j < downarrow.length; j++) {
+                var darrow = downarrow[j]
+                if (darrow.classList.contains('fa-chevron-up')) {
+                    darrow.classList.remove('fa-chevron-up');
+                    darrow.classList.add('fa-chevron-down');
+                }
+            }
+        }
+    }
+</script>
+{% block script_block %}
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,18 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block style_block %}
+
+{% endblock %}
+{% block body_block %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.GET.next }}">
+        <button type="submit" class="btn btn-primary">Edit</button>
+    </form>
+{% endblock %}
+
+{% block script_block %}
+
+{% endblock %}

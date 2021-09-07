@@ -1,0 +1,161 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block style_block %}
+    <style>
+    .star-widget label{
+
+  float: right;
+  transition: all 0.2s ease;
+}
+    input:not(:checked) ~ label:hover,
+    input:not(:checked) ~ label:hover ~ label{
+        color: #fbbf24;
+    }
+    {#input#rate_five:checked ~ label{#}
+    {#    color: #0d57ff;#}
+    {#}#}
+        input:checked ~ label{
+            color: #fbbf24;
+        }
+    </style>
+{% endblock %}
+{% block body_block %}
+    <div class="flex gap-4 flex-col md:flex-row">
+        <div class="product-image exzoom w-full md:w-1/2 lg:w-2/5" id="exzoom">
+            <!-- Images -->
+            <div class="exzoom_img_box">
+                <ul class='exzoom_img_ul'>
+                    <li><img src="{% static 'home/images/product 1.jpg' %}"/></li>
+                    <li><img src="{% static 'home/images/product 1.jpg' %}"/></li>
+                    <li><img src="{% static 'home/images/product 1.jpg' %}"/></li>
+                    <li><img src="{% static 'home/images/product 1.jpg' %}"/></li>
+                    <li><img src="{% static 'home/images/product 1.jpg' %}"/></li>
+                </ul>
+            </div>
+            <!-- <a href="https://www.jqueryscript.net/tags.php?/Thumbnail/">Thumbnail</a> Nav-->
+            <div class="exzoom_nav"></div>
+            <!-- Nav Buttons -->
+            <p class="exzoom_btn">
+                <a href="javascript:void(0);" class="exzoom_prev_btn"> < </a>
+                <a href="javascript:void(0);" class="exzoom_next_btn"> > </a>
+            </p>
+        </div>
+        <div class="product-basic border rounded-md p-4 w-full md:w-1/2 lg:w-2/5">
+            <h2 class="font-bold text-2xl">Arm Chair</h2>
+            <div class="flex gap-2 pt-3 text-yellow-400">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fal fa-star"></i>
+            </div>
+            <h2 class="text-md font-bold pt-3">Brand: <span class="text-blue-400 font-normal"><a href="">Samsung</a></span></h2>
+            <h2 class="text-md font-bold pt-3">Availability: <span class="text-yellow-600 font-normal">In Stock</span></h2>
+            <div class="py-3 flex items-center gap-4">
+                <span class="text-3xl text-red-600">৳50000</span>
+                <span class="text-3xl text-red-300 line-through">৳70000</span>
+                <span class="bg-yellow-400 p-3 text-white">%10</span>
+            </div>
+            <hr>
+            <h2 class="text-md font-bold text-xl pt-3">Options:</h2>
+            <h2 class="text-md font-bold pt-3">Size:
+                <select name="" id="" class="border px-2 py-1">
+                    <option value="">S</option>
+                    <option value="">M</option>
+                    <option value="">X</option>
+                    <option value="">XL</option>
+                    <option value="">XXL</option>
+                </select>
+            </h2>
+            <h2 class="text-md font-bold pt-3">Color:
+                <select name="" id="" class="border px-2 py-1">
+                    <option value="">Red</option>
+                    <option value="">Blue</option>
+                    <option value="">Yellow</option>
+                    <option value="">Green</option>
+                    <option value="">Indigo</option>
+                </select>
+            </h2>
+            <h2 class="text-md font-bold pt-3">Quantity:
+                <input type="number" min="1" class="border px-2 py-1" value="1">
+            </h2>
+            <div class="flex pt-3 gap-4 flex-col xl:flex-row text-center">
+                <a href="" class="py-3 px-4 bg-yellow-400 rounded text-white flex gap-2 items-center justify-center w-full" data-tootik="Add to Wishlist"><i class="fa fa-heart"></i><span class="">Add to Wishlish</span></a>
+                <a href="" class="py-3 px-4 bg-gray-800 rounded text-white flex gap-2 items-center justify-center w-full" data-tootik="Add to Cart"><i class="fa fa-shopping-bag"></i><span class="">Add to Cart</span></a>
+            </div>
+        </div>
+        <div class="related-product rounded-md border hidden lg:block w-full lg:w-1/5">
+            <a href=""><img src="{% static 'home/images/banner1.png' %}" alt=""></a>
+        </div>
+    </div>
+    <div class="flex gap-4 flex-col lg:flex-row flex-col-reverse">
+        <div class="mt-4 border rounded-md details w-full lg:w-2/3 p-4">
+            <h2 class="font-bold text-2xl">Product Details:</h2>
+            <h2 style="font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 20px; line-height: 1.35; font-family: Lato, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin-top: 0px; color: rgb(40, 40, 40);">Samsung Galaxy A22 6GB/128GB</h2><ul style="margin-top: 0rem; margin-bottom: 2.5rem; color: rgb(40, 40, 40); font-family: Lato, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 13px;"><li style="margin-top: 0rem; margin-bottom: 1rem;">OS: Android 11, One UI Core 3.1</li><li style="margin-top: 0rem; margin-bottom: 1rem;">Chipset: Mediatek Helio G80 (12 nm)</li><li style="margin-top: 0rem; margin-bottom: 1rem;">CPU: Octa-core (2x2.0 GHz Cortex-A75 &amp; 6x1.8 GHz Cortex-A55)</li><li style="margin-top: 0rem; margin-bottom: 1rem;">GPU: Mali-G52 MC2</li><li style="margin-top: 0rem; margin-bottom: 1rem;">RAM: 6GB</li><li style="margin-top: 0rem; margin-bottom: 1rem;">ROM: 128GB</li><li style="margin-top: 0rem; margin-bottom: 1rem;">Back Camera: 48MP+8MP+2MP+2MP</li><li style="margin-top: 0rem; margin-bottom: 1rem;">Front Camera: 13MP</li><li style="margin-top: 0rem; margin-bottom: 1rem;">Display Size: 6.4 inches.&nbsp;<span class="spec-highlight__value">Super AMOLED Display</span></li><li style="margin-top: 0rem; margin-bottom: 1rem;">Display Resolution: 720 x 1600 pixels, 20:9 ratio (~274 ppi density)</li><li style="margin-top: 0rem; margin-bottom: 1rem;">Build: Glass front, plastic frame, plastic back</li><li style="margin-top: 0rem; margin-bottom: 1rem;">Connectivity: Wi-Fi 802.11 a/b/g/n/ac, dual-band, Wi-Fi Direct, hotspot | Bluetooth 5.0, A2DP, LE | GPS: Yes, with A-GPS, GLONASS, GALILEO, BDS | NFC: No | Radio: Unspecified | USB: USB Type-C 2.0</li><li style="margin-top: 0rem; margin-bottom: 1rem;">Sensors: Fingerprint (side-mounted), accelerometer, gyro, compass | Virtual proximity sensing</li><li style="margin-top: 0rem; margin-bottom: 1rem;">Battery Type: Li-Po 5000 mAh, non-removable | Fast charging 15W</li></ul><p style="margin-top: 0rem; margin-bottom: 0px; color: rgb(40, 40, 40); font-family: Lato, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 13px;"><img src="https://b2b-pickaboocdn.azureedge.net/media/wysiwyg/Samsung-Galaxy-A22.jpg" alt="Samsung Galaxy A22 6GB/128GB " width="100%" style="height: auto; max-width: 100%;"></p>
+        </div>
+        <div class="mt-4 border rounded-md details w-full lg:w-1/3 p-4">
+            <h2 class="font-bold text-2xl">Add a Review:</h2>
+            <form action="" class="flex flex-col" method="POST">
+                {% csrf_token %}
+                <div class="flex gap-2">
+                    <div class="star-widget pt-4">
+                        <input type="radio" name="rating" id="rate_five" hidden>
+                        <label for="rate_five"><i class="fa fa-star pl-2"></i></label>
+                        <input type="radio" name="rating" id="rate_four" hidden>
+                        <label for="rate_four"><i class="fa fa-star px-2"></i></label>
+                        <input type="radio" name="rating" id="rate_three" hidden>
+                        <label for="rate_three"><i class="fa fa-star px-2"></i></label>
+                        <input type="radio" name="rating" id="rate_two" hidden>
+                        <label for="rate_two"><i class="fa fa-star px-2"></i></label>
+                        <input type="radio" name="rating" id="rate_one" hidden>
+                        <label for="rate_one"><i class="fa fa-star pr-2"></i></label>
+                    </div>
+                </div>
+                <label for="review" class="my-2 text-lg">Comment</label>
+                <textarea name="review" rows="5" class="border-2 resize-none p-4" id="review"></textarea>
+                <button type="submit"
+                        class="bg-yellow-400 hover:bg-yellow-500 focus:bg-yellow-500 focus:outline-none py-1 px-2 my-2">
+                    Submit
+                </button>
+            </form>
+            <h2 class="font-bold text-2xl my-2">All Reviews:</h2>
+            <div class="p-2 border rounded">
+                <h2 class="font-bold">User Name</h2>
+                <div class="flex gap-2 py-3 text-yellow-400">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fal fa-star"></i>
+                </div>
+                <p class="">Nice Product Review</p>
+                <p class="text-gray-400 text-xs">Aug 20, 2021</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script_block %}
+    <script>
+        $(function () {
+
+            $("#exzoom").exzoom({
+
+                // thumbnail nav options
+                "navWidth": 60,
+                "navHeight": 60,
+                "navItemNum": 5,
+                "navItemMargin": 7,
+                "navBorder": 1,
+
+                // autoplay
+                "autoPlay": true,
+
+                // autoplay interval in milliseconds
+                "autoPlayTimeout": 2000
+
+            });
+
+        });
+    </script>
+{% endblock %}

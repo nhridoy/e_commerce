@@ -1,0 +1,319 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+{% block style_block %}
+    <style>
+        .notfound {
+            display: none;
+        }
+    </style>
+{% endblock %}
+{% block body_block %}
+    <div class="row bg-white p-2">
+        <div class="col-md-6 d-flex justify-content-center border">
+            <div class="img-admin-profile">
+                <img src="{{ selected_user.user_profile.profile_pic.url }}" class="img-fluid" alt="">
+            </div>
+        </div>
+        <div class="col-md-6 user-basic border">
+            <table class="table table-hover">
+                <tbody>
+                <tr>
+                    <th scope="row">Name:</th>
+                    <td>{{ selected_user.user_profile.full_name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Phone 1:</th>
+                    <td>{{ selected_user.user_profile.phone_one }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Phone 2:</th>
+                    <td>{{ selected_user.user_profile.phone_two }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Email:</th>
+                    <td>{{ selected_user.email }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <a href="{% url "admin_app:single_user_edit" user_pk=selected_user.pk %}?next={{ request.path|urlencode }}" class="btn btn-primary">Edit</a>
+        </div>
+    </div>
+    <div class="row bg-white p-2">
+        <div class="col-md-6 border p-2">
+            <h6 class="display-4">Billing Address</h6>
+            <table class="table table-bordered table-hover table-striped">
+                <tr>
+                    <th scope="row">Name:</th>
+                    <td>{{ selected_user.user_billing_address.name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Billing Phone:</th>
+                    <td>{{ selected_user.user_billing_address.phone }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Address:</th>
+                    <td>{{ selected_user.user_billing_address.address }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Post Code:</th>
+                    <td>{{ selected_user.user_billing_address.post_code }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">District:</th>
+                    <td>{{ selected_user.user_billing_address.district }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">State:</th>
+                    <td>{{ selected_user.user_billing_address.state }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Country:</th>
+                    <td>{{ selected_user.user_billing_address.country }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6 border p-2">
+            <h6 class="display-4">Shipping Address</h6>
+            <table class="table table-bordered table-hover table-striped">
+                <tr>
+                    <th scope="row">Name:</th>
+                    <td>{{ selected_user.user_shipping_address.name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Shipping Phone:</th>
+                    <td>{{ selected_user.user_shipping_address.phone }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Address:</th>
+                    <td>{{ selected_user.user_shipping_address.address }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Post Code:</th>
+                    <td>{{ selected_user.user_shipping_address.post_code }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">District:</th>
+                    <td>{{ selected_user.user_shipping_address.district }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">State:</th>
+                    <td>{{ selected_user.user_shipping_address.state }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Country:</th>
+                    <td>{{ selected_user.user_shipping_address.country }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row bg-white p-2">
+        <div class="col-md-12 border p-2">
+            <form action="" method="GET">
+                <input type="search" class="form-control" placeholder="Search now" aria-label="search"
+                       aria-describedby="search" style="border-radius: 5px" id='txt_searchall' required>
+            </form>
+            <h6 class="display-4 p-3">Order Details</h6>
+            <div class="table-responsive" style="overflow: auto; height: 100vh">
+                <table id="recent-purchases-listing" class="table table-bordered table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Products</th>
+                        <th>Total Price</th>
+                        <th>Payment Status</th>
+                        <th>Delivery Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="search-tr">
+                        <th scope="row">1</th>
+                        <td><a href="{% url "admin_app:order_details" %}">95623</a></td>
+                        <td>5 June 2020</td>
+                        <td>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                        </td>
+                        <td>50000</td>
+                        <td><span class="badge badge-success" style="border-radius: 5px;">Paid</span></td>
+                        <td><span class="badge badge-success" style="border-radius: 5px;">Delivered</span></td>
+                    </tr>
+                    <tr id="search-tr">
+                        <th scope="row">1</th>
+                        <td><a href="{% url "admin_app:order_details" %}">95623</a></td>
+                        <td>5 June 2020</td>
+                        <td>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                        </td>
+                        <td>50000</td>
+                        <td><span class="badge badge-warning" style="border-radius: 5px;">UnPaid</span></td>
+                        <td><span class="badge badge-info" style="border-radius: 5px;">Processing</span></td>
+                    </tr>
+                    <tr id="search-tr">
+                        <th scope="row">1</th>
+                        <td><a href="{% url "admin_app:order_details" %}">95623</a></td>
+                        <td>5 June 2020</td>
+                        <td>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                        </td>
+                        <td>50000</td>
+                        <td><span class="badge badge-warning" style="border-radius: 5px;">UnPaid</span></td>
+                        <td><span class="badge badge-warning" style="border-radius: 5px;">Cancelled</span></td>
+                    </tr>
+                    <tr id="search-tr">
+                        <th scope="row">1</th>
+                        <td><a href="{% url "admin_app:order_details" %}">95623</a></td>
+                        <td>5 June 2020</td>
+                        <td>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                        </td>
+                        <td>50000</td>
+                        <td><span class="badge badge-danger" style="border-radius: 5px;">Failed</span></td>
+                        <td><span class="badge badge-warning" style="border-radius: 5px;">Cancelled</span></td>
+                    </tr>
+                    <tr id="search-tr">
+                        <th scope="row">1</th>
+                        <td><a href="{% url "admin_app:order_details" %}">95623</a></td>
+                        <td>5 June 2020</td>
+                        <td>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                        </td>
+                        <td>50000</td>
+                        <td><span class="badge badge-outline-danger" style="border-radius: 5px;">Refund Requested</span></td>
+                        <td><span class="badge badge-outline-danger" style="border-radius: 5px;">Return Requested</span></td>
+                    </tr>
+                    <tr id="search-tr">
+                        <th scope="row">1</th>
+                        <td><a href="{% url "admin_app:order_details" %}">95623</a></td>
+                        <td>5 June 2020</td>
+                        <td>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                        </td>
+                        <td>50000</td>
+                        <td><span class="badge badge-danger" style="border-radius: 5px;">Refunded</span></td>
+                        <td><span class="badge badge-danger" style="border-radius: 5px;">Returned</span></td>
+                    </tr>
+                    <tr id="search-tr">
+                        <th scope="row">1</th>
+                        <td><a href="{% url "admin_app:order_details" %}">95623</a></td>
+                        <td>5 June 2020</td>
+                        <td>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                        </td>
+                        <td>50000</td>
+                        <td><span class="badge badge-success" style="border-radius: 5px;">Paid</span></td>
+                        <td><span class="badge badge-info" style="border-radius: 5px;">Processing</span></td>
+                    </tr>
+                    <tr id="search-tr">
+                        <th scope="row">1</th>
+                        <td><a href="{% url "admin_app:order_details" %}">95623</a></td>
+                        <td>5 June 2020</td>
+                        <td>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                        </td>
+                        <td>50000</td>
+                        <td><span class="badge badge-success" style="border-radius: 5px;">Paid</span></td>
+                        <td><span class="badge badge-success" style="border-radius: 5px;">Delivered</span></td>
+                    </tr>
+                    <tr id="search-tr">
+                        <th scope="row">1</th>
+                        <td><a href="{% url "admin_app:order_details" %}">95623</a></td>
+                        <td>5 June 2020</td>
+                        <td>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                        </td>
+                        <td>50000</td>
+                        <td><span class="badge badge-success" style="border-radius: 5px;">Paid</span></td>
+                        <td><span class="badge badge-success" style="border-radius: 5px;">Delivered</span></td>
+                    </tr>
+                    <tr id="search-tr">
+                        <th scope="row">1</th>
+                        <td><a href="{% url "admin_app:order_details" %}">95623</a></td>
+                        <td>5 June 2020</td>
+                        <td>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                            3 x laptop BDT-5000(BDT-500)<br>
+                        </td>
+                        <td>50000</td>
+                        <td><span class="badge badge-success" style="border-radius: 5px;">Paid</span></td>
+                        <td><span class="badge badge-success" style="border-radius: 5px;">Delivered</span></td>
+                    </tr>
+
+                    </tbody>
+                    <!-- Display this <tr> when no record found while search -->
+                    <tr class='notfound'>
+                        <td colspan="7">No record found</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block script_block %}
+    <script>
+        $(document).ready(function () {
+
+            // Search all columns
+            $('#txt_searchall').keyup(function () {
+                // Search Text
+                var search = $(this).val();
+
+                // Hide all table tbody rows
+                $('table tbody #search-tr').hide();
+
+                // Count total search result
+                var len = $('table tbody #search-tr:not(.notfound) td:contains("' + search + '")').length;
+
+                if (len > 0) {
+                    // Searching text in columns and show match row
+                    $('table tbody #search-tr:not(.notfound) td:contains("' + search + '")').each(function () {
+                        $(this).closest('#search-tr').show();
+                        $('.notfound').hide();
+                    });
+                } else {
+                    $('.notfound').show();
+                }
+
+            });
+
+        });
+
+        // Case-insensitive searching (Note - remove the below script for Case sensitive search )
+        $.expr[":"].contains = $.expr.createPseudo(function (arg) {
+            return function (elem) {
+                return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+            };
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,10 @@
+/* Text and background color for dark mode */
+@media (prefers-color-scheme: dark) {
+  /*body {*/
+  /*  color: #ddd;*/
+  /*  background-color: #222;*/
+  /*}*/
+  /*.navbar .navbar-menu-wrapper, .dropdown-menu{*/
+  /*  background-color: #222;*/
+  /*}*/
+}

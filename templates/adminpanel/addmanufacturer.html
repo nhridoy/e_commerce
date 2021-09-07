@@ -1,0 +1,200 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block style_block %}
+    <style>
+        .notfound {
+            display: none;
+        }
+    </style>
+{% endblock %}
+{% block body_block %}
+    <form action="" id="add" method="POST" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.company_name|as_crispy_field }}
+            </div>
+            <div class="col-md-6">
+                {{ form.company_logo|as_crispy_field }}
+            </div>
+
+            <div class="col-md-12">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Add Company</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="alert"></div>
+
+    <form action="" method="GET" class="mt-3">
+        <input type="search" class="form-control" placeholder="Search now" aria-label="search"
+               aria-describedby="search" style="border-radius: 5px" id='txt_searchall' required>
+    </form>
+
+    <div class="bg-white mt-4 table-responsive" style="overflow: auto; height: 80vh;">
+        <table id="myTable" class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Edit Name</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody id="empty">
+
+            </tbody>
+            <!-- Display this <tr> when no record found while search -->
+            <tr class='notfound'>
+                <td colspan="8">No record found</td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}
+
+{% block script_block %}
+    <script>
+        $(document).ready(function () {
+
+            // Search all columns
+            $('#txt_searchall').keyup(function () {
+                // Search Text
+                var search = $(this).val();
+
+                // Hide all table tbody rows
+                $('table tbody #search-tr').hide();
+
+                // Count total search result
+                var len = $('table tbody #search-tr:not(.notfound) td:contains("' + search + '")').length;
+
+                if (len > 0) {
+                    // Searching text in columns and show match row
+                    $('table tbody #search-tr:not(.notfound) td:contains("' + search + '")').each(function () {
+                        $(this).closest('#search-tr').show();
+                        $('.notfound').hide();
+                    });
+                } else {
+                    $('.notfound').show();
+                }
+
+            });
+
+        });
+
+        // Case-insensitive searching (Note - remove the below script for Case sensitive search )
+        $.expr[":"].contains = $.expr.createPseudo(function (arg) {
+            return function (elem) {
+                return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+            };
+        });
+    </script>
+
+    <script>
+        // Showing Items in Table on page load from server
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: "{% url 'admin_app:view-manufacturer' %}",
+                success: function (response) {
+                    $('#empty').empty();
+                    for (var key in response.data) {
+                        let temp = `<tr id="search-tr"><th scope="row">${parseInt(key) + 1}</th><td><img src="/media/${response.data[key].company_logo}" alt="${response.data[key].company_name}"></td><td>${response.data[key].company_name}</td><td><a href="/adminpanel/editcompany/${response.data[key].id}" title="Edit" class="btn"><i class="mdi mdi-pencil-box"></i></a></td><td><a href="/adminpanel/deletecompany/${response.data[key].id}" class="btn" title="Delete" id="delete"><i class="mdi mdi-delete text-danger"></i></a></td></tr>`
+
+                        $('#empty').append(temp);
+                    }
+
+                    // Using DataTableJS Plugin to make the table interactive
+                    $('#myTable').DataTable({
+                        "paging": true,
+                        "ordering": true,
+                        "info": true,
+                        "searching": true
+                    });
+
+                },
+                error: function (response) {
+                    console.log('Nothing')
+                }
+            });
+
+        })
+
+        // Form with File Submitting without page loading
+        function upload(event) {
+            event.preventDefault();
+            var data = new FormData($('#add').get(0));
+
+            // Form Submition part
+            $.ajax({
+                url: '{% url "admin_app:add-manufacturer" %}',
+                type: $(this).attr('method'),
+                data: data,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    $("#add")[0].reset();
+
+                    $.ajax({
+                        type: 'GET',
+                        url: "{% url 'admin_app:view-manufacturer' %}",
+                        success: function (response) {
+                            $('#empty').empty();
+                            for (var key in response.data) {
+                                let temp = `<tr id="search-tr"><th scope="row">${parseInt(key) + 1}</th><td><img src="/media/${response.data[key].company_logo}" alt="${response.data[key].company_name}"></td><td>${response.data[key].company_name}</td><td><a href="/adminpanel/editcompany/${response.data[key].id}" title="Edit" class="btn"><i class="mdi mdi-pencil-box"></i></a></td><td><a href="/adminpanel/deletecompany/${response.data[key].id}" class="btn" title="Delete" id="delete"><i class="mdi mdi-delete text-danger"></i></a></td></tr>`
+
+                                $('#empty').append(temp);
+                            }
+                        },
+                        error: function (response) {
+                            console.log('Nothing')
+                        }
+                    });
+
+                }
+            });
+
+            // Validating if the item already exists
+            $.ajax({
+                type: 'POST',
+                data: $(this).serialize(), // get the form data
+                url: "{% url 'admin_app:val-manufacturer' %}",
+                // on success
+                success: function (response) {
+                    if (response.exists === true) {
+                        $('.alert').empty()
+                        $('.alert').removeClass('alert-success')
+                        $('.alert').addClass('alert-danger').append('Item Already Exists')
+                        setTimeout(function () {
+                            $('.alert').empty()
+                            $('.alert').removeClass('alert-danger')
+                        }, 1000)
+                    } else {
+                        $('.alert').empty()
+                        $('.alert').removeClass('alert-danger')
+                        $('.alert').addClass('alert-success').append('Item Added Successfully')
+                        setTimeout(function () {
+                            $('.alert').empty()
+                            $('.alert').removeClass('alert-success')
+                        }, 1000)
+
+                    }
+
+                },
+                // on error
+                error: function (response) {
+                    // alert the error if any error occured
+                    console.log(response.responseJSON.errors)
+                }
+            });
+            return false;
+        }
+
+        $(function () {
+            $('#add').submit(upload);
+        });
+    </script>
+{% endblock %}
