@@ -1,0 +1,37 @@
+{% extends 'home/base.html' %}
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+{% block style_block %}
+
+{% endblock %}
+
+{% block body_block %}
+
+    <div class="p-10 border lg:mx-40">
+        <div class="flex flex-col lg:flex-row text-center md:text-left pb-2 items-center justify-between">
+            <h2 class="text-xl">Welcome, Please Register Here.</h2>
+            <p class="">Already a Member? <a href="{% url 'profile_app:login' %}" class="text-blue-500">Login</a> Here.</p>
+        </div>
+        <div class="p-4">
+            <form action="" class="flex flex-col items-center gap-8" method="POST">
+                <div class="w-full">
+                    {{ form|crispy }}
+                    {% csrf_token %}
+                </div>
+
+                <div class="w-full flex flex-col gap-4 text-center">
+                    <button type="submit"
+                            class="bg-yellow-400 transition duration-300 hover:bg-yellow-500 focus:bg-yellow-500 text-white p-3 w-full">
+                        Sign Up
+                    </button>
+                    <a href="{% provider_login_url "facebook" %}"
+                       class="bg-blue-400 transition duration-300 hover:bg-blue-500 focus:bg-blue-500 text-white p-3 w-full">Facebook</a>
+                    <a href="{% provider_login_url "google" %}"
+                       class="bg-red-400 transition duration-300 hover:bg-red-500 focus:bg-red-500 text-white p-3 w-full">Google</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}
+

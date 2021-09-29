@@ -23,6 +23,7 @@ urlpatterns = [
     path('adminpanel/', include('adminpanelapp.urls')),
     path('', include('ecomapp.urls')),
     path('product/', include('productapp.urls')),
-    path('profile/', include('userapp.urls')),
+    path('account/', include('userapp.urls')),
     path('summernote/', include('django_summernote.urls')),
+    path('accounts/', include('allauth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

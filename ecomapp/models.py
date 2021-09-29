@@ -9,6 +9,9 @@ class Category(models.Model):
     def __str__(self):
         return self.category_name
 
+    def has_subcategories(self):
+        return self.category.count()
+
     class Meta:
         verbose_name_plural = "Categories"
 

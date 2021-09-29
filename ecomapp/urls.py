@@ -4,5 +4,7 @@ from ecomapp import views
 app_name = 'ecom_app'
 
 urlpatterns = [
-    path('', views.indexview, name='index'),
+    path('', views.indexView, name='index'),
+    path('all/<category>', views.pageView, name='all'),
+    path('filter/', views.filterView, name='filter'),
 ]

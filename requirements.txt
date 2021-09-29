@@ -8,3 +8,5 @@ django-summernote # Adding Markdown Support
 # django-forms-fieldset # Adding Fieldsets to form as like as admin
 
 bleach~=3.3.0
+django-allauth~=0.45.0
+python-decouple

@@ -1,0 +1,128 @@
+{% load my_filter %}
+{% if products %}
+    {% for product in products %}
+    {% if path == product.subcategory_name|lower|replacespace %}
+        <div class="rounded-lg border-2 bg-gray-100 m-2 lg:m-4 group">
+            <div class="border-b-2 text-center relative">
+                <img src="{{ product.image.url }}" alt="" class="">
+                <div class="absolute top-0 left-0 bg-yellow-500 px-5 text-white">{{ product.product_discount }}%</div>
+                <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
+                    <a href="" data-tootik="Add to Cart"><i
+                            class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
+                    <a href="{% url "product_details_app:product" product_slug=product.product_slug %}"
+                       data-tootik="View Details"><i
+                            class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
+                    <a href="" data-tootik="Add to Wishlist"><i
+                            class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
+                </div>
+            </div>
+            <div class="bg-white text-center">
+                <div class="flex gap-2 justify-center pt-3 text-yellow-400">
+                    {% for star in product.avg_rating|times %}
+                        <i class="fa fa-star"></i>
+                    {% endfor %}
+                    {% for star in product.avg_rating|sub %}
+                        <i class="fal fa-star"></i>
+                    {% endfor %}
+                </div>
+                <h2 class="font-light text-lg text-center py-3"><a
+                        href="{% url "product_details_app:product" product_slug=product.product_slug %}"
+                        class="transition-all hover:text-yellow-500">{{ product.product_name }}</a>
+                </h2>
+
+                {% if product.product_discount > 0 %}
+                    <h2 class="font-normal text-md text-center pb-3">BDT
+                        - {{ product.product_new_price }}</h2>
+                    <h2 class="font-normal text-md text-center pb-3 line-through">BDT
+                        - {{ product.product_price }}</h2>
+                {% else %}
+                    <h2 class="font-normal text-md text-center pb-3">BDT
+                        - {{ product.product_new_price }}</h2>
+                {% endif %}
+            </div>
+        </div>
+    {% elif path == product.category_name|lower|replacespace %}
+        <div class="rounded-lg border-2 bg-gray-100 m-2 lg:m-4 group">
+            <div class="border-b-2 text-center relative">
+                <img src="{{ product.image.url }}" alt="" class="">
+                <div class="absolute top-0 left-0 bg-yellow-500 px-5 text-white">{{ product.product_discount }}%</div>
+                <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
+                    <a href="" data-tootik="Add to Cart"><i
+                            class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
+                    <a href="{% url "product_details_app:product" product_slug=product.product_slug %}"
+                       data-tootik="View Details"><i
+                            class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
+                    <a href="" data-tootik="Add to Wishlist"><i
+                            class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
+                </div>
+            </div>
+            <div class="bg-white text-center">
+                <div class="flex gap-2 justify-center pt-3 text-yellow-400">
+                    {% for star in product.avg_rating|times %}
+                        <i class="fa fa-star"></i>
+                    {% endfor %}
+                    {% for star in product.avg_rating|sub %}
+                        <i class="fal fa-star"></i>
+                    {% endfor %}
+                </div>
+                <h2 class="font-light text-lg text-center py-3"><a
+                        href="{% url "product_details_app:product" product_slug=product.product_slug %}"
+                        class="transition-all hover:text-yellow-500">{{ product.product_name }}</a>
+                </h2>
+
+                {% if product.product_discount > 0 %}
+                    <h2 class="font-normal text-md text-center pb-3">BDT
+                        - {{ product.product_new_price }}</h2>
+                    <h2 class="font-normal text-md text-center pb-3 line-through">BDT
+                        - {{ product.product_price }}</h2>
+                {% else %}
+                    <h2 class="font-normal text-md text-center pb-3">BDT
+                        - {{ product.product_new_price }}</h2>
+                {% endif %}
+            </div>
+        </div>
+    {% elif path == product.company_name|lower|replacespace %}
+        <div class="rounded-lg border-2 bg-gray-100 m-2 lg:m-4 group">
+            <div class="border-b-2 text-center relative">
+                <img src="{{ product.image.url }}" alt="" class="">
+                <div class="absolute top-0 left-0 bg-yellow-500 px-5 text-white">{{ product.product_discount }}%</div>
+                <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
+                    <a href="" data-tootik="Add to Cart"><i
+                            class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
+                    <a href="{% url "product_details_app:product" product_slug=product.product_slug %}"
+                       data-tootik="View Details"><i
+                            class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
+                    <a href="" data-tootik="Add to Wishlist"><i
+                            class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
+                </div>
+            </div>
+            <div class="bg-white text-center">
+                <div class="flex gap-2 justify-center pt-3 text-yellow-400">
+                    {% for star in product.avg_rating|times %}
+                        <i class="fa fa-star"></i>
+                    {% endfor %}
+                    {% for star in product.avg_rating|sub %}
+                        <i class="fal fa-star"></i>
+                    {% endfor %}
+                </div>
+                <h2 class="font-light text-lg text-center py-3"><a
+                        href="{% url "product_details_app:product" product_slug=product.product_slug %}"
+                        class="transition-all hover:text-yellow-500">{{ product.product_name }}</a>
+                </h2>
+
+                {% if product.product_discount > 0 %}
+                    <h2 class="font-normal text-md text-center pb-3">BDT
+                        - {{ product.product_new_price }}</h2>
+                    <h2 class="font-normal text-md text-center pb-3 line-through">BDT
+                        - {{ product.product_price }}</h2>
+                {% else %}
+                    <h2 class="font-normal text-md text-center pb-3">BDT
+                        - {{ product.product_new_price }}</h2>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+{% else %}
+    <div class='grid place-items-center'>No Product Found</div>
+{% endif %}

@@ -10,6 +10,7 @@
         Ecommerce - HomePage
     {% endblock %}</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+{#    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.11/tailwind.css" rel="stylesheet">#}
     <link rel="stylesheet" href="{% static "home/fonts/css/all.min.css" %}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -126,12 +127,12 @@
                 submenus.classList.remove('max-h-96');
                 submenus.classList.add('max-h-0');
             }
-            if (arrows.classList.contains('fa-chevron-down')) {
-                arrows.classList.remove('fa-chevron-down');
-                arrows.classList.add('fa-chevron-up');
+            if (arrows.classList.contains('fa-chevron-right')) {
+                arrows.classList.remove('fa-chevron-right');
+                arrows.classList.add('fa-chevron-left');
             } else {
-                arrows.classList.remove('fa-chevron-up');
-                arrows.classList.add('fa-chevron-down');
+                arrows.classList.remove('fa-chevron-left');
+                arrows.classList.add('fa-chevron-right');
             }
         })
     }

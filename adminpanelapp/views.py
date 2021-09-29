@@ -425,7 +425,7 @@ def editproductsview(request, product_pk):
         form2.append(EditProductImagesForm(instance=current_product_image))
 
     if request.method == 'POST':
-        form = EditProductForm(request.POST, instance=current_product)
+        form = EditProductForm(request.POST, request.FILES, instance=current_product)
         # form3 = []
         # for current_product_image in current_product_images:
         #     form3.append(EditProductImagesForm(request.POST, request.FILES, instance=current_product_image))

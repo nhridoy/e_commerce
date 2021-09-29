@@ -1,6 +1,8 @@
 from django.db import models
 from ecomapp.models import Category, SubCategory, Company
+from userapp.models import User
 import uuid
+from django.db.models import Avg
 from multiselectfield import MultiSelectField
 
 from django.db.models.signals import post_save
@@ -46,7 +48,11 @@ class Product(models.Model):
     product_discount = models.IntegerField(blank=False, verbose_name='Discount', help_text='%')
     product_new_price = models.IntegerField(verbose_name='New Price', help_text='Warning: Do not edit this field!!!',
                                             blank=True)
+    product_sales = models.IntegerField(default=0, verbose_name='Bought Amount', blank=True, null=True)
+    added_date = models.DateTimeField(verbose_name='Created At', auto_now_add=True)
+
     product_description = models.TextField(verbose_name='Description', blank=False)
+    image = models.ImageField(upload_to='product', verbose_name='Image')
     MY_CHOICES = (('red', 'Red'),
                   ('blue', 'Blue'),
                   ('green', 'Green'),
@@ -55,17 +61,45 @@ class Product(models.Model):
     product_colors = models.ManyToManyField(Colors, verbose_name='Available Colors', blank=True)
     product_sizes = models.ManyToManyField(Sizes, verbose_name='Available Sizes', blank=True)
 
-    product_slug = models.SlugField(blank=True)
+    product_slug = models.SlugField(max_length=256, blank=True)
 
     # product_images = models.ImageField(blank=False, null=False)
+    @property
+    def avg_rating(self):
+        if self.product_ratings.all().count() > 0:
+            return self.product_ratings.all().aggregate(Avg('product_rating'))['product_rating__avg']
+        else:
+            return 0
+
+    @property
+    def total_rating_count(self):
+        if self.product_ratings.all().count() > 0:
+            return self.product_ratings.all().count()
+        else:
+            return 0
 
     def save(self, *args, **kwargs):
         self.product_new_price = self.product_price - (self.product_price * self.product_discount) / 100
-        self.product_slug = f"{self.product_name.replace(' ','-')}-{self.category_name.category_name.replace(' ','-')}-{self.subcategory_name.subcategory_name.replace(' ','-')}-{self.company_name.company_name.replace(' ','-')}-{uuid.uuid4()}"
+        self.product_slug = f"{self.product_name.replace(' ', '-').replace('/', '-').replace('(', '').replace(')', '')}-{uuid.uuid4()}"
         super(Product, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.product_name
+
+
+class Rating(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_ratings')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_rating')
+    rating = (
+        (1, 1),
+        (2, 2),
+        (3, 3),
+        (4, 4),
+        (5, 5),
+    )
+    product_rating = models.IntegerField(verbose_name='Rating', blank=False, choices=rating)
+    product_comment = models.TextField(verbose_name='Comment', blank=True)
+    rating_date = models.DateTimeField(auto_now_add=True)
 
 
 class ProductImages(models.Model):

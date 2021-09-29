@@ -41,6 +41,9 @@ class BillingAddress(models.Model):
     state = models.CharField(max_length=100, verbose_name="State")
     country = models.CharField(max_length=100, verbose_name="Country")
 
+    def get_full_address(self):
+        return f'{self.address}, {self.post_code}, {self.district}, {self.state}, {self.country}'
+
     def __str__(self):
         return f"{self.user.username}'s Billing Address"
 
@@ -69,6 +72,9 @@ class ShippingAddress(models.Model):
     district = models.CharField(max_length=100, verbose_name="District")
     state = models.CharField(max_length=100, verbose_name="State")
     country = models.CharField(max_length=100, verbose_name="Country")
+
+    def get_full_address(self):
+        return f'{self.address}, {self.post_code}, {self.district}, {self.state}, {self.country}'
 
     def __str__(self):
         return f"{self.user.username}'s Shipping Address"

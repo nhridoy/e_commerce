@@ -1,0 +1,21 @@
+{% extends 'home/base.html' %}
+{% load crispy_forms_tags %}
+{% block style_block %}
+
+{% endblock %}
+
+{% block body_block %}
+    <div class="flex flex-col lg:flex-row gap-4">
+        <div class="w-full lg:w-1/5">
+            {% include 'home/profile-left-menu.html' %}
+        </div>
+        <div class="flex flex-col lg:flex-row gap-4 lg:w-4/5 w-full">
+            <form action="" class="" method="POST" enctype="multipart/form-data">
+                {{ form|crispy }}
+                {% csrf_token %}
+                <button type="submit" class="bg-yellow-400 hpver:bg-yellow-500 focus:bg-yellow-500 px-3 py-2 rounded-md">Edit</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+

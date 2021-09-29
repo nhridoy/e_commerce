@@ -6,79 +6,41 @@
 {% block body_block %}
     <div class="flex flex-col lg:flex-row gap-4">
         <div class="w-full lg:w-1/5">
-            <div class="flex flex-col gap-2 sticky top-20">
-                <div class="border p-3 flex items-center">
-                    <div class="w-2/5"><img src="{% static 'home/images/22.jpg' %}" alt=""
-                                            class="w-10 h-10 object-cover rounded-full"></div>
-                    <div class="w-4/5 flex flex-col">
-                        <h2 class="font-semibold">Full Name</h2>
-                        <p class="bg-green-400 px-2 py-1 rounded-full text-white w-max">Verified</p>
-                    </div>
-                </div>
-                <div class="border p-3 flex gap-2 items-baseline">
-                    <i class="fal fa-address-card"></i>
-                    <div class="flex flex-col gap-1">
-                        <h2 class="font-semibold">Manage Account</h2>
-                        <a href="" class="hover:text-yellow-500 transition duration-200">Profile Information</a>
-                        <a href="" class="hover:text-yellow-500 transition duration-200">Manage Address</a>
-                        <a href="" class="hover:text-yellow-500 transition duration-200">Change Password</a>
-                    </div>
-
-                </div>
-                <div class="border p-3 flex gap-2 items-baseline">
-                    <i class="fal fa-shopping-bag"></i>
-                    <div class="flex flex-col gap-1">
-                        <h2 class="font-semibold">Manage Orders</h2>
-                        <a href="" class="hover:text-yellow-500 transition duration-200">Order History</a>
-                        <a href="" class="hover:text-yellow-500 transition duration-200">Wishlist</a>
-                        <a href="" class="hover:text-yellow-500 transition duration-200">Cart</a>
-                    </div>
-
-                </div>
-                <div class="border p-3 flex gap-2 items-baseline">
-                    <i class="fal fa-money-bill"></i>
-                    <div class="flex flex-col gap-1">
-                        <h2 class="font-semibold">Manage Account</h2>
-                        <a href="" class="hover:text-yellow-500 transition duration-200">Payment Information</a>
-                    </div>
-
-                </div>
-            </div>
-
+            {% include 'home/profile-left-menu.html' %}
         </div>
         <div class="flex flex-col lg:flex-row gap-4 lg:w-4/5 w-full">
             <div class="flex gap-2 flex-col p-4 border rounded w-full lg:w-1/3" style="height: max-content">
                 <div class="flex gap-6 justify-between">
                     <h2 class="font-bold">Personal Profile</h2>
-                    <a href="" class="text-yellow-600">Edit</a>
+                    <a href="{% url 'profile_app:edit-profile' %}" class="text-yellow-600">Edit</a>
                 </div>
                 <div class="">
-                    <p class="font-bold">Full Name</p>
-                    <p>0177777777</p>
-                    <p>0177777777</p>
-                    <p>email@email.com</p>
+                    <p class="font-bold">{{ user.user_profile.full_name }}</p>
+                    <p>{{ user.user_profile.phone_one }}</p>
+                    <p>{{ user.user_profile.phone_two }}</p>
+                    <p>{{ user.email }}</p>
                 </div>
             </div>
             <div class="flex gap-2 flex-col p-4 border rounded w-full lg:w-1/3" style="height: max-content">
                 <div class="flex gap-6 justify-between">
                     <h2 class="font-bold">Billing Address</h2>
-                    <a href="" class="text-yellow-600">Edit</a>
+                    <a href="{% url 'profile_app:edit-billing-address' %}" class="text-yellow-600">Edit</a>
                 </div>
                 <div class="">
-                    <p class="font-bold">Full Name</p>
-                    <p>New jail Road, Mohiskhola, Narail Thana, Narail Sadar, Narail, Khulna, Bangladesh</p>
-                    <p>0177777777</p>
+                    <p class="font-bold">{{ user.user_billing_address.name }}</p>
+                    <p>{{ user.user_billing_address.get_full_address }}</p>
+                    <p>{{ user.user_billing_address.phone }}</p>
                 </div>
             </div>
             <div class="flex gap-2 flex-col p-4 border rounded w-full lg:w-1/3" style="height: max-content">
                 <div class="flex gap-6 justify-between">
                     <h2 class="font-bold">Shipping Address</h2>
-                    <a href="" class="text-yellow-600">Edit</a>
+                    <a href="{% url 'profile_app:edit-shipping-address' %}" class="text-yellow-600">Edit</a>
                 </div>
                 <div class="">
-                    <p class="font-bold">Full Name</p>
-                    <p>New jail Road, Mohiskhola, Narail Thana, Narail Sadar, Narail, Khulna, Bangladesh</p>
-                    <p>0177777777</p>
+                    <p class="font-bold">{{ user.user_shipping_address.name }}</p>
+                    <p>{{ user.user_shipping_address.get_full_address }}</p>
+                    <p>{{ user.user_shipping_address.phone }}</p>
                 </div>
             </div>
         </div>
