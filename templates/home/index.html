@@ -328,266 +328,44 @@
         <hr class="">
 
         <div class="new-arrival grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-4 mt-4">
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
+            {% for product in new_products %}
+                <div class="rounded-lg border-2 bg-gray-100 m-4 group">
+                    <div class="border-b-2 text-center relative">
+                        <img src="{{ product.image.url }}" alt="" class="">
+                        <div class="absolute top-0 left-0 bg-yellow-500 px-5 text-white">{{ product.product_discount }}%</div>
+                        <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
+                            <a href="" data-tootik="Add to Cart"><i
+                                    class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
+                            <a href="{% url 'product_details_app:product' product_slug=product.product_slug %}"
+                               data-tootik="View Details"><i
+                                    class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
+                            <a href="{% url 'product_details_app:add_to_wishlist' product_slug=product.product_slug %}" data-tootik="Add to Wishlist"><i
+                                    class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
+                        </div>
+                    </div>
+                    <div class="bg-white text-center">
+                        <div class="flex gap-2 justify-center pt-3 text-yellow-400">
+                            {% for star in product.avg_rating|times %}
+                                <i class="fa fa-star"></i>
+                            {% endfor %}
+                            {% for star in product.avg_rating|sub %}
+                                <i class="fal fa-star"></i>
+                            {% endfor %}
+                        </div>
+                        <h2 class="font-light text-lg text-center py-3"><a
+                                href="{% url 'product_details_app:product' product_slug=product.product_slug %}"
+                                class="transition-all hover:text-yellow-500">{{ product.product_name }}</a></h2>
+                        {% if product.product_discount > 0 %}
+                            <h2 class="font-normal text-md text-center pb-3">BDT - {{ product.product_new_price }}</h2>
+                            <h2 class="font-normal text-md text-center pb-3 line-through">BDT
+                                - {{ product.product_price }}</h2>
+                        {% else %}
+                            <h2 class="font-normal text-md text-center pb-3">BDT - {{ product.product_new_price }}</h2>
+                        {% endif %}
                     </div>
                 </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
+            {% endfor %}
+
 
         </div>
     </div>
@@ -614,266 +392,43 @@
         <hr class="">
 
         <div class="top-selling grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-4 mt-4">
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
+            {% for product in top_selling %}
+                <div class="rounded-lg border-2 bg-gray-100 m-4 group">
+                    <div class="border-b-2 text-center relative">
+                        <img src="{{ product.image.url }}" alt="" class="">
+                        <div class="absolute top-0 left-0 bg-yellow-500 px-5 text-white">{{ product.product_discount }}%</div>
+                        <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
+                            <a href="" data-tootik="Add to Cart"><i
+                                    class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
+                            <a href="{% url 'product_details_app:product' product_slug=product.product_slug %}"
+                               data-tootik="View Details"><i
+                                    class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
+                            <a href="{% url 'product_details_app:add_to_wishlist' product_slug=product.product_slug %}" data-tootik="Add to Wishlist"><i
+                                    class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
+                        </div>
+                    </div>
+                    <div class="bg-white text-center">
+                        <div class="flex gap-2 justify-center pt-3 text-yellow-400">
+                            {% for star in product.avg_rating|times %}
+                                <i class="fa fa-star"></i>
+                            {% endfor %}
+                            {% for star in product.avg_rating|sub %}
+                                <i class="fal fa-star"></i>
+                            {% endfor %}
+                        </div>
+                        <h2 class="font-light text-lg text-center py-3"><a
+                                href="{% url 'product_details_app:product' product_slug=product.product_slug %}"
+                                class="transition-all hover:text-yellow-500">{{ product.product_name }}</a></h2>
+                        {% if product.product_discount > 0 %}
+                            <h2 class="font-normal text-md text-center pb-3">BDT - {{ product.product_new_price }}</h2>
+                            <h2 class="font-normal text-md text-center pb-3 line-through">BDT
+                                - {{ product.product_price }}</h2>
+                        {% else %}
+                            <h2 class="font-normal text-md text-center pb-3">BDT - {{ product.product_new_price }}</h2>
+                        {% endif %}
                     </div>
                 </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
-            <div class="rounded-lg border-2 bg-gray-100 m-4 group">
-                <div class="border-b-2 text-center relative">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="">
-                    <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                        <a href="" data-tootik="Add to Cart"><i
-                                class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="View Details"><i
-                                class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                        <a href="" data-tootik="Add to Wishlist"><i
-                                class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                    </div>
-                </div>
-                <div class="bg-white text-center">
-                    <div class="flex gap-2 justify-center pt-3 text-yellow-400">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fal fa-star"></i>
-                    </div>
-                    <h2 class="font-light text-lg text-center py-3"><a href=""
-                                                                       class="transition-all hover:text-yellow-500">Arm
-                        Chair</a></h2>
-                    <h2 class="font-normal text-md text-center pb-3">BDT - 5000</h2>
-                </div>
-            </div>
+            {% endfor %}
 
         </div>
     </div>
@@ -901,9 +456,10 @@
                         <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
                             <a href="" data-tootik="Add to Cart"><i
                                     class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                            <a href="{% url "product_details_app:product" product_slug=product.product_slug %}" data-tootik="View Details"><i
+                            <a href="{% url "product_details_app:product" product_slug=product.product_slug %}"
+                               data-tootik="View Details"><i
                                     class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                            <a href="" data-tootik="Add to Wishlist"><i
+                            <a href="{% url 'product_details_app:add_to_wishlist' product_slug=product.product_slug %}" data-tootik="Add to Wishlist"><i
                                     class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
                         </div>
                     </div>
@@ -916,8 +472,9 @@
                                 <i class="fal fa-star"></i>
                             {% endfor %}
                         </div>
-                        <h2 class="font-light text-lg text-center py-3"><a href="{% url "product_details_app:product" product_slug=product.product_slug %}"
-                                                                           class="transition-all hover:text-yellow-500">{{ product.product_name }}</a>
+                        <h2 class="font-light text-lg text-center py-3"><a
+                                href="{% url "product_details_app:product" product_slug=product.product_slug %}"
+                                class="transition-all hover:text-yellow-500">{{ product.product_name }}</a>
                         </h2>
 
                         {% if product.product_discount > 0 %}
@@ -930,8 +487,6 @@
                     </div>
                 </div>
             {% endfor %}
-
-
         </div>
     </div>
 

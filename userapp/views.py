@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from userapp.forms import LoginForm, RegistrationForm, EditProfileForm, EditShippingAddressForm, EditBillingAddressForm
-
+from productapp.models import WishList
 
 # Create your views here.
 def login_executed(redirect_to):
@@ -46,7 +46,7 @@ def logoutView(request):
 @login_executed('ecom_app:index')
 def loginView(request):
     form = LoginForm()
-
+    next_page = request.GET.get('next')
     if request.method == 'POST':
         form = LoginForm(data=request.POST)
         username, password = request.POST.get('username'), request.POST.get('password')
@@ -54,6 +54,8 @@ def loginView(request):
         if user:
             if user.is_active:
                 login(request, user)
+                if next_page:
+                    return redirect(next_page)
                 return HttpResponseRedirect(reverse('ecom_app:index'))
 
     context = {
@@ -137,3 +139,19 @@ def changePasswordView(request):
         'form': form,
     }
     return render(request, 'home/edit-info.html', context)
+
+
+@login_required
+def wishlistView(request):
+    wishlists = WishList.objects.filter(user=request.user)
+    context = {
+        'wishlists': wishlists
+    }
+    return render(request, 'home/wishlist.html', context)
+
+@login_required
+def cartView(request):
+    context = {
+
+    }
+    return render(request, 'home/cart.html', context)

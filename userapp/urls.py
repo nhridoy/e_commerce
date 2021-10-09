@@ -12,4 +12,7 @@ urlpatterns = [
     path('change-password/', views.changePasswordView, name='change-password'),
     path('edit-billing-address/', views.editBillingAddressView, name='edit-billing-address'),
     path('edit-shipping-address/', views.editShippingAddressView, name='edit-shipping-address'),
+
+    path('wishlist/', views.wishlistView, name='wish-list'),
+    path('cart/', views.cartView, name='cart'),
 ]

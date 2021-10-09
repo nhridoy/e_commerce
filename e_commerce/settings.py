@@ -97,6 +97,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'ecomapp.context_processor.menu',
+                'ecomapp.context_processor.count',
             ],
         },
     },

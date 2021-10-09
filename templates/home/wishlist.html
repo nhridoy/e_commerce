@@ -6,44 +6,7 @@
 {% block body_block %}
     <div class="flex gap-4">
         <div class="w-1/5 hidden lg:block">
-            <div class="flex flex-col gap-2 sticky top-20">
-                <div class="border p-3 flex items-center">
-                <div class="w-2/5"><img src="{% static 'home/images/22.jpg' %}" alt=""
-                                        class="w-10 h-10 object-cover rounded-full"></div>
-                <div class="w-4/5 flex flex-col">
-                    <h2 class="font-semibold">Full Name</h2>
-                    <p class="bg-green-400 px-2 py-1 rounded-full text-white w-max">Verified</p>
-                </div>
-            </div>
-            <div class="border p-3 flex gap-2 items-baseline">
-                <i class="fal fa-address-card"></i>
-                <div class="flex flex-col gap-1">
-                    <h2 class="font-semibold">Manage Account</h2>
-                    <a href="" class="hover:text-yellow-500 transition duration-200">Profile Information</a>
-                    <a href="" class="hover:text-yellow-500 transition duration-200">Manage Address</a>
-                    <a href="" class="hover:text-yellow-500 transition duration-200">Change Password</a>
-                </div>
-
-            </div>
-            <div class="border p-3 flex gap-2 items-baseline">
-                <i class="fal fa-shopping-bag"></i>
-                <div class="flex flex-col gap-1">
-                    <h2 class="font-semibold">Manage Orders</h2>
-                    <a href="" class="hover:text-yellow-500 transition duration-200">Order History</a>
-                    <a href="" class="hover:text-yellow-500 transition duration-200">Wishlist</a>
-                    <a href="" class="hover:text-yellow-500 transition duration-200">Cart</a>
-                </div>
-
-            </div>
-            <div class="border p-3 flex gap-2 items-baseline">
-                <i class="fal fa-money-bill"></i>
-                <div class="flex flex-col gap-1">
-                    <h2 class="font-semibold">Manage Account</h2>
-                    <a href="" class="hover:text-yellow-500 transition duration-200">Payment Information</a>
-                </div>
-
-            </div>
-            </div>
+            {% include 'home/profile-left-menu.html' %}
 
         </div>
         <div class="text-center lg:w-4/5 w-full">
@@ -54,161 +17,41 @@
                 <div class="w-1/5 border">Add to Cart</div>
                 <div class="w-1/5 border">Remove</div>
             </div>
-            <div class="wishlist-head flex justify-between items-center border">
-                <div class="w-1/5 p-4 flex justify-center"><img src="{% static 'home/images/product 1.jpg' %}" alt=""
+            {% for wishlist in wishlists %}
+                {% if wishlist.product.product_quantity > 0 %}
+                    <div class="wishlist-head flex justify-between items-center border">
+                <div class="w-1/5 p-4 flex justify-center"><img src="{{ wishlist.product.image.url }}" alt=""
                                                                 class="w-1/2"></div>
                 <div class="w-1/5 p-4 ">
                     <div class="">
-                        <h2 class="font-semibold">Arm Chair</h2>
-                        <p class="text-red-500">Out of Stock</p>
-                    </div>
-                </div>
-                <div class="w-1/5 p-4 text-yellow-500 font-semibold">6000</div>
-                <div class="w-1/5 p-4"><span class="cursor-not-allowed bg-yellow-200 focus:outline-none px-2 py-1 rounded hidden md:block">Add to Cart</span><span class="block md:hidden"><i class="fal fa-shopping-bag cursor-not-allowed bg-yellow-200 focus:outline-none rounded p-2"></i></span></div>
-                <div class="w-1/5 p-4"><a href=""
-                                          class="bg-red-400 hover:bg-red-500 focus:bg-red-500 focus:outline-none text-white px-2 py-1 rounded"
-                                          data-tootik="Remove From Cart"><i class="fal fa-trash"></i></a></div>
-            </div>
-            <div class="wishlist-head flex justify-between items-center border">
-                <div class="w-1/5 p-4 flex justify-center"><img src="{% static 'home/images/product 1.jpg' %}" alt=""
-                                                                class="w-1/2"></div>
-                <div class="w-1/5 p-4 ">
-                    <div class="">
-                        <h2 class="font-semibold">Arm Chair</h2>
+                        <a href="{% url 'product_details_app:product' product_slug=wishlist.product.product_slug %}"><h2 class="font-semibold">{{ wishlist.product.product_name }}</h2></a>
                         <p class="text-green-500">In Stock</p>
                     </div>
                 </div>
-                <div class="w-1/5 p-4 text-yellow-500 font-semibold">6000</div>
+                <div class="w-1/5 p-4 text-yellow-500 font-semibold">{{ wishlist.product.product_new_price }}</div>
                 <div class="w-1/5 p-4"><a href=""
                                           class=""><span class="bg-yellow-400 hover:bg-yellow-500 focus:bg-yellow-500 focus:outline-none px-2 py-1 rounded hidden md:block">Add to Cart</span><span class="block md:hidden"><i class="fal fa-shopping-bag bg-yellow-400 focus:bg-yellow-500 hover:bg-yellow-500 focus:outline-none rounded p-2"></i></span></a></div>
-                <div class="w-1/5 p-4"><a href=""
-                                          class="bg-red-400 hover:bg-red-500 focus:bg-red-500 focus:outline-none text-white px-2 py-1 rounded"
-                                          data-tootik="Remove From Cart"><i class="fal fa-trash"></i></a></div>
+                <div class="w-1/5 p-4"><a href="{% url 'product_details_app:remove_from_wishlist' id=wishlist.id %}" class="bg-red-400 hover:bg-red-500 focus:bg-red-500 focus:outline-none text-white px-2 py-1 rounded" data-tootik="Remove From Cart"><i class="fal fa-trash"></i></a></div>
             </div>
-            <div class="wishlist-head flex justify-between items-center border">
-                <div class="w-1/5 p-4 flex justify-center"><img src="{% static 'home/images/product 1.jpg' %}" alt=""
-                                                                class="w-1/2"></div>
+                    {% else %}
+                    <div class="wishlist-head flex justify-between items-center border">
+                <div class="w-1/5 p-4 flex justify-center"><img src="{{ wishlist.product.image.url }}" alt="" class="w-1/2"></div>
                 <div class="w-1/5 p-4 ">
                     <div class="">
-                        <h2 class="font-semibold">Arm Chair</h2>
+                        <h2 class="font-semibold">{{ wishlist.product.product_name }}</h2>
                         <p class="text-red-500">Out of Stock</p>
                     </div>
                 </div>
-                <div class="w-1/5 p-4 text-yellow-500 font-semibold">6000</div>
+                <div class="w-1/5 p-4 text-yellow-500 font-semibold">{{ wishlist.product.product_new_price }}</div>
                 <div class="w-1/5 p-4"><span class="cursor-not-allowed bg-yellow-200 focus:outline-none px-2 py-1 rounded hidden md:block">Add to Cart</span><span class="block md:hidden"><i class="fal fa-shopping-bag cursor-not-allowed bg-yellow-200 focus:outline-none rounded p-2"></i></span></div>
-                <div class="w-1/5 p-4"><a href=""
-                                          class="bg-red-400 hover:bg-red-500 focus:bg-red-500 focus:outline-none text-white px-2 py-1 rounded"
-                                          data-tootik="Remove From Cart"><i class="fal fa-trash"></i></a></div>
+                <div class="w-1/5 p-4"><a href="{% url 'product_details_app:remove_from_wishlist' id=wishlist.id %}" class="bg-red-400 hover:bg-red-500 focus:bg-red-500 focus:outline-none text-white px-2 py-1 rounded" data-tootik="Remove From Cart"><i class="fal fa-trash"></i></a></div>
             </div>
-            <div class="wishlist-head flex justify-between items-center border">
-                <div class="w-1/5 p-4 flex justify-center"><img src="{% static 'home/images/product 1.jpg' %}" alt=""
-                                                                class="w-1/2"></div>
-                <div class="w-1/5 p-4 ">
-                    <div class="">
-                        <h2 class="font-semibold">Arm Chair</h2>
-                        <p class="text-green-500">In Stock</p>
-                    </div>
-                </div>
-                <div class="w-1/5 p-4 text-yellow-500 font-semibold">6000</div>
-                <div class="w-1/5 p-4"><a href=""
-                                          class=""><span class="bg-yellow-400 hover:bg-yellow-500 focus:bg-yellow-500 focus:outline-none px-2 py-1 rounded hidden md:block">Add to Cart</span><span class="block md:hidden"><i class="fal fa-shopping-bag bg-yellow-400 focus:bg-yellow-500 hover:bg-yellow-500 focus:outline-none rounded p-2"></i></span></a></div>
-                <div class="w-1/5 p-4"><a href=""
-                                          class="bg-red-400 hover:bg-red-500 focus:bg-red-500 focus:outline-none text-white px-2 py-1 rounded"
-                                          data-tootik="Remove From Cart"><i class="fal fa-trash"></i></a></div>
-            </div>
-            <div class="wishlist-head flex justify-between items-center border">
-                <div class="w-1/5 p-4 flex justify-center"><img src="{% static 'home/images/product 1.jpg' %}" alt=""
-                                                                class="w-1/2"></div>
-                <div class="w-1/5 p-4 ">
-                    <div class="">
-                        <h2 class="font-semibold">Arm Chair</h2>
-                        <p class="text-red-500">Out of Stock</p>
-                    </div>
-                </div>
-                <div class="w-1/5 p-4 text-yellow-500 font-semibold">6000</div>
-                <div class="w-1/5 p-4"><span class="cursor-not-allowed bg-yellow-200 focus:outline-none px-2 py-1 rounded hidden md:block">Add to Cart</span><span class="block md:hidden"><i class="fal fa-shopping-bag cursor-not-allowed bg-yellow-200 focus:outline-none rounded p-2"></i></span></div>
-                <div class="w-1/5 p-4"><a href=""
-                                          class="bg-red-400 hover:bg-red-500 focus:bg-red-500 focus:outline-none text-white px-2 py-1 rounded"
-                                          data-tootik="Remove From Cart"><i class="fal fa-trash"></i></a></div>
-            </div>
-            <div class="wishlist-head flex justify-between items-center border">
-                <div class="w-1/5 p-4 flex justify-center"><img src="{% static 'home/images/product 1.jpg' %}" alt=""
-                                                                class="w-1/2"></div>
-                <div class="w-1/5 p-4 ">
-                    <div class="">
-                        <h2 class="font-semibold">Arm Chair</h2>
-                        <p class="text-green-500">In Stock</p>
-                    </div>
-                </div>
-                <div class="w-1/5 p-4 text-yellow-500 font-semibold">6000</div>
-                <div class="w-1/5 p-4"><a href=""
-                                          class=""><span class="bg-yellow-400 hover:bg-yellow-500 focus:bg-yellow-500 focus:outline-none px-2 py-1 rounded hidden md:block">Add to Cart</span><span class="block md:hidden"><i class="fal fa-shopping-bag bg-yellow-400 focus:bg-yellow-500 hover:bg-yellow-500 focus:outline-none rounded p-2"></i></span></a></div>
-                <div class="w-1/5 p-4"><a href=""
-                                          class="bg-red-400 hover:bg-red-500 focus:bg-red-500 focus:outline-none text-white px-2 py-1 rounded"
-                                          data-tootik="Remove From Cart"><i class="fal fa-trash"></i></a></div>
-            </div>
-            <div class="wishlist-head flex justify-between items-center border">
-                <div class="w-1/5 p-4 flex justify-center"><img src="{% static 'home/images/product 1.jpg' %}" alt=""
-                                                                class="w-1/2"></div>
-                <div class="w-1/5 p-4 ">
-                    <div class="">
-                        <h2 class="font-semibold">Arm Chair</h2>
-                        <p class="text-red-500">Out of Stock</p>
-                    </div>
-                </div>
-                <div class="w-1/5 p-4 text-yellow-500 font-semibold">6000</div>
-                <div class="w-1/5 p-4"><span class="cursor-not-allowed bg-yellow-200 focus:outline-none px-2 py-1 rounded hidden md:block">Add to Cart</span><span class="block md:hidden"><i class="fal fa-shopping-bag cursor-not-allowed bg-yellow-200 focus:outline-none rounded p-2"></i></span></div>
-                <div class="w-1/5 p-4"><a href=""
-                                          class="bg-red-400 hover:bg-red-500 focus:bg-red-500 focus:outline-none text-white px-2 py-1 rounded"
-                                          data-tootik="Remove From Cart"><i class="fal fa-trash"></i></a></div>
-            </div>
-            <div class="wishlist-head flex justify-between items-center border">
-                <div class="w-1/5 p-4 flex justify-center"><img src="{% static 'home/images/product 1.jpg' %}" alt=""
-                                                                class="w-1/2"></div>
-                <div class="w-1/5 p-4 ">
-                    <div class="">
-                        <h2 class="font-semibold">Arm Chair</h2>
-                        <p class="text-green-500">In Stock</p>
-                    </div>
-                </div>
-                <div class="w-1/5 p-4 text-yellow-500 font-semibold">6000</div>
-                <div class="w-1/5 p-4"><a href=""
-                                          class=""><span class="bg-yellow-400 hover:bg-yellow-500 focus:bg-yellow-500 focus:outline-none px-2 py-1 rounded hidden md:block">Add to Cart</span><span class="block md:hidden"><i class="fal fa-shopping-bag bg-yellow-400 focus:bg-yellow-500 hover:bg-yellow-500 focus:outline-none rounded p-2"></i></span></a></div>
-                <div class="w-1/5 p-4"><a href=""
-                                          class="bg-red-400 hover:bg-red-500 focus:bg-red-500 focus:outline-none text-white px-2 py-1 rounded"
-                                          data-tootik="Remove From Cart"><i class="fal fa-trash"></i></a></div>
-            </div>
-            <div class="wishlist-head flex justify-between items-center border">
-                <div class="w-1/5 p-4 flex justify-center"><img src="{% static 'home/images/product 1.jpg' %}" alt=""
-                                                                class="w-1/2"></div>
-                <div class="w-1/5 p-4 ">
-                    <div class="">
-                        <h2 class="font-semibold">Arm Chair</h2>
-                        <p class="text-red-500">Out of Stock</p>
-                    </div>
-                </div>
-                <div class="w-1/5 p-4 text-yellow-500 font-semibold">6000</div>
-                <div class="w-1/5 p-4"><span class="cursor-not-allowed bg-yellow-200 focus:outline-none px-2 py-1 rounded hidden md:block">Add to Cart</span><span class="block md:hidden"><i class="fal fa-shopping-bag cursor-not-allowed bg-yellow-200 focus:outline-none rounded p-2"></i></span></div>
-                <div class="w-1/5 p-4"><a href=""
-                                          class="bg-red-400 hover:bg-red-500 focus:bg-red-500 focus:outline-none text-white px-2 py-1 rounded"
-                                          data-tootik="Remove From Cart"><i class="fal fa-trash"></i></a></div>
-            </div>
-            <div class="wishlist-head flex justify-between items-center border">
-                <div class="w-1/5 p-4 flex justify-center"><img src="{% static 'home/images/product 1.jpg' %}" alt=""
-                                                                class="w-1/2"></div>
-                <div class="w-1/5 p-4 ">
-                    <div class="">
-                        <h2 class="font-semibold">Arm Chair</h2>
-                        <p class="text-green-500">In Stock</p>
-                    </div>
-                </div>
-                <div class="w-1/5 p-4 text-yellow-500 font-semibold">6000</div>
-                <div class="w-1/5 p-4"><a href=""
-                                          class=""><span class="bg-yellow-400 hover:bg-yellow-500 focus:bg-yellow-500 focus:outline-none px-2 py-1 rounded hidden md:block">Add to Cart</span><span class="block md:hidden"><i class="fal fa-shopping-bag bg-yellow-400 focus:bg-yellow-500 hover:bg-yellow-500 focus:outline-none rounded p-2"></i></span></a></div>
-                <div class="w-1/5 p-4"><a href=""
-                                          class="bg-red-400 hover:bg-red-500 focus:bg-red-500 focus:outline-none text-white px-2 py-1 rounded"
-                                          data-tootik="Remove From Cart"><i class="fal fa-trash"></i></a></div>
-            </div>
+                {% endif %}
+            {% endfor %}
+
+
+
+
 
 
         </div>

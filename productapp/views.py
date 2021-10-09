@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from productapp.models import Product, ProductImages, Coupon, Sizes, Colors, Rating
+from productapp.models import Product, ProductImages, Coupon, Sizes, Colors, Rating, WishList
 from productapp.forms import RatingForm
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -23,15 +24,15 @@ def productDetailsView(request, product_slug):
     return render(request, 'home/product-details.html', context)
 
 
-def wishlistView(request):
-    context = {
+@login_required
+def addToWishListView(request, product_slug):
+    current_product = Product.objects.get(product_slug=product_slug)
+    addToWishList = WishList.objects.create(user=request.user, product=current_product)
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
-    }
-    return render(request, 'home/wishlist.html', context)
 
-
-def cartView(request):
-    context = {
-
-    }
-    return render(request, 'home/cart.html', context)
+@login_required
+def removeFromWishListView(request, id):
+    current_wishlist = WishList.objects.get(id=id, user=request.user)
+    current_wishlist.delete()
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])

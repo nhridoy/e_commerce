@@ -6,13 +6,17 @@ from productapp.models import Company, Category, SubCategory, Product, ProductIm
 
 def indexView(request):
     companies = Company.objects.all()
-    electronics = Product.objects.filter(category_name__category_name='Electronic Devices')
+    electronics = Product.objects.filter(category_name__category_name='Electronic Devices').order_by('-added_date')[:10]
+    new_products = Product.objects.all().order_by('-added_date')[:10]
+    top_selling = Product.objects.all().order_by('-total_order')[:10]
     product_images = ProductImages.objects.all()
 
     context = {
         'companies': companies,
         'electronics': electronics,
         'product_images': product_images,
+        'new_products': new_products,
+        'top_selling': top_selling,
     }
     return render(request, 'home/index.html', context)
 

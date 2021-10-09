@@ -63,7 +63,8 @@ class Product(models.Model):
 
     product_slug = models.SlugField(max_length=256, blank=True)
 
-    # product_images = models.ImageField(blank=False, null=False)
+    total_order = models.IntegerField(blank=True)
+
     @property
     def avg_rating(self):
         if self.product_ratings.all().count() > 0:
@@ -130,3 +131,8 @@ class Coupon(models.Model):
 # @receiver(post_save, sender=Product)
 # def save_image(sender, instance, **kwargs):
 #     instance.image_product.save()
+
+
+class WishList(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_wishlist')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='wishlist_product')

@@ -29,8 +29,8 @@
         <div class="flex flex-col gap-1">
             <h2 class="font-semibold">Manage Orders</h2>
             <a href="" class="hover:text-yellow-500 transition duration-200">Order History</a>
-            <a href="" class="hover:text-yellow-500 transition duration-200">Wishlist</a>
-            <a href="" class="hover:text-yellow-500 transition duration-200">Cart</a>
+            <a href="{% url 'profile_app:wish-list' %}" class="hover:text-yellow-500 transition duration-200">Wishlist</a>
+            <a href="{% url 'profile_app:cart' %}" class="hover:text-yellow-500 transition duration-200">Cart</a>
         </div>
 
     </div>
