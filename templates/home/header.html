@@ -84,7 +84,7 @@
                 </span>
                 <span class="relative inline-block">
                     <a href="{% url 'profile_app:cart' %}" data-tootik="Cart"><i class="fal fa-shopping-cart"></i></a>
-                    <span class="top-0 right-0 bg-red-600 absolute text-white text-xs px-1 font-bold inline-flex items-center justify-center rounded-full leading-none transform translate-x-1/3">20</span>
+                    <span class="top-0 right-0 bg-red-600 absolute text-white text-xs px-1 font-bold inline-flex items-center justify-center rounded-full leading-none transform translate-x-1/3">{{ user.cart_user.count }}</span>
                 </span>
             {% else %}
                 <span class="relative profile-icon cursor-pointer md:block hidden">

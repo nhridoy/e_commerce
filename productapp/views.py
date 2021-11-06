@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from productapp.models import Product, ProductImages, Coupon, Sizes, Colors, Rating, WishList
 from productapp.forms import RatingForm
 from django.http import HttpResponseRedirect
@@ -36,3 +36,6 @@ def removeFromWishListView(request, id):
     current_wishlist = WishList.objects.get(id=id, user=request.user)
     current_wishlist.delete()
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+

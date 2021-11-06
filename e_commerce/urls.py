@@ -23,6 +23,7 @@ urlpatterns = [
     path('adminpanel/', include('adminpanelapp.urls')),
     path('', include('ecomapp.urls')),
     path('product/', include('productapp.urls')),
+    path('purchase/', include('purchaseapp.urls')),
     path('account/', include('userapp.urls')),
     path('summernote/', include('django_summernote.urls')),
     path('accounts/', include('allauth.urls')),

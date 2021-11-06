@@ -8,7 +8,7 @@
         <div class="w-full lg:w-3/5">
             <div class="flex justify-between items-center border-b-2 pb-1">
                 <h2 class="text-xl font-semibold">Shopping Cart</h2>
-                <h2 class="text-xl">3 Items</h2>
+                <h2 class="text-xl">{{ carts.count }} Items</h2>
             </div>
             <div class="flex justify-center mt-1">
                 <h2 class="w-1/4 text-center font-bold">Product Details</h2>
@@ -16,143 +16,29 @@
                 <h2 class="w-1/4 text-center font-bold">Price</h2>
                 <h2 class="w-1/4 text-center font-bold">Total</h2>
             </div>
-            <div class="flex justify-center mt-2 items-center border-b pb-1">
-                <div class="flex justify-center items-center w-1/4 text-center">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="w-1/2">
-                    <h2 class="">Arm Chair</h2>
+            {% for cart in carts %}
+                <div class="flex justify-center mt-2 items-center border-b pb-1">
+                    <div class="flex justify-center items-center w-1/4 text-center">
+                        <img src="{{ cart.product.image.url }}" alt="{{ cart.product.product_name }}" class="w-1/2">
+                        <h2 class="">{{ cart.product.product_name }}</h2>
+                    </div>
+                    <div class="flex justify-center items-center gap-1 w-1/4 text-center">
+                        <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">-</button>
+                        <h2 class="font-semibold">{{ cart.quantity }}</h2>
+                        <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">+</button>
+                    </div>
+                    <h2 class="w-1/4 text-center">{{ cart.product.product_new_price }}</h2>
+                    <h2 class="w-1/4 text-center">{{ cart.get_total }}</h2>
                 </div>
-                <div class="flex justify-center items-center gap-1 w-1/4 text-center">
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">-</button>
-                    <h2 class="font-semibold">2</h2>
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">+</button>
-                </div>
-                <h2 class="w-1/4 text-center">400</h2>
-                <h2 class="w-1/4 text-center">800</h2>
-            </div>
-            <div class="flex justify-center mt-2 items-center border-b pb-1">
-                <div class="flex justify-center items-center w-1/4 text-center">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="w-1/2">
-                    <h2 class="">Arm Chair</h2>
-                </div>
-                <div class="flex justify-center items-center gap-1 w-1/4 text-center">
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">-</button>
-                    <h2 class="font-semibold">2</h2>
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">+</button>
-                </div>
-                <h2 class="w-1/4 text-center">400</h2>
-                <h2 class="w-1/4 text-center">800</h2>
-            </div>
-            <div class="flex justify-center mt-2 items-center border-b pb-1">
-                <div class="flex justify-center items-center w-1/4 text-center">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="w-1/2">
-                    <h2 class="">Arm Chair</h2>
-                </div>
-                <div class="flex justify-center items-center gap-1 w-1/4 text-center">
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">-</button>
-                    <h2 class="font-semibold">2</h2>
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">+</button>
-                </div>
-                <h2 class="w-1/4 text-center">400</h2>
-                <h2 class="w-1/4 text-center">800</h2>
-            </div>
-            <div class="flex justify-center mt-2 items-center border-b pb-1">
-                <div class="flex justify-center items-center w-1/4 text-center">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="w-1/2">
-                    <h2 class="">Arm Chair</h2>
-                </div>
-                <div class="flex justify-center items-center gap-1 w-1/4 text-center">
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">-</button>
-                    <h2 class="font-semibold">2</h2>
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">+</button>
-                </div>
-                <h2 class="w-1/4 text-center">400</h2>
-                <h2 class="w-1/4 text-center">800</h2>
-            </div>
-            <div class="flex justify-center mt-2 items-center border-b pb-1">
-                <div class="flex justify-center items-center w-1/4 text-center">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="w-1/2">
-                    <h2 class="">Arm Chair</h2>
-                </div>
-                <div class="flex justify-center items-center gap-1 w-1/4 text-center">
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">-</button>
-                    <h2 class="font-semibold">2</h2>
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">+</button>
-                </div>
-                <h2 class="w-1/4 text-center">400</h2>
-                <h2 class="w-1/4 text-center">800</h2>
-            </div>
-            <div class="flex justify-center mt-2 items-center border-b pb-1">
-                <div class="flex justify-center items-center w-1/4 text-center">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="w-1/2">
-                    <h2 class="">Arm Chair</h2>
-                </div>
-                <div class="flex justify-center items-center gap-1 w-1/4 text-center">
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">-</button>
-                    <h2 class="font-semibold">2</h2>
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">+</button>
-                </div>
-                <h2 class="w-1/4 text-center">400</h2>
-                <h2 class="w-1/4 text-center">800</h2>
-            </div>
-            <div class="flex justify-center mt-2 items-center border-b pb-1">
-                <div class="flex justify-center items-center w-1/4 text-center">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="w-1/2">
-                    <h2 class="">Arm Chair</h2>
-                </div>
-                <div class="flex justify-center items-center gap-1 w-1/4 text-center">
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">-</button>
-                    <h2 class="font-semibold">2</h2>
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">+</button>
-                </div>
-                <h2 class="w-1/4 text-center">400</h2>
-                <h2 class="w-1/4 text-center">800</h2>
-            </div>
-            <div class="flex justify-center mt-2 items-center border-b pb-1">
-                <div class="flex justify-center items-center w-1/4 text-center">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="w-1/2">
-                    <h2 class="">Arm Chair</h2>
-                </div>
-                <div class="flex justify-center items-center gap-1 w-1/4 text-center">
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">-</button>
-                    <h2 class="font-semibold">2</h2>
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">+</button>
-                </div>
-                <h2 class="w-1/4 text-center">400</h2>
-                <h2 class="w-1/4 text-center">800</h2>
-            </div>
-            <div class="flex justify-center mt-2 items-center border-b pb-1">
-                <div class="flex justify-center items-center w-1/4 text-center">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="w-1/2">
-                    <h2 class="">Arm Chair</h2>
-                </div>
-                <div class="flex justify-center items-center gap-1 w-1/4 text-center">
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">-</button>
-                    <h2 class="font-semibold">2</h2>
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">+</button>
-                </div>
-                <h2 class="w-1/4 text-center">400</h2>
-                <h2 class="w-1/4 text-center">800</h2>
-            </div>
-            <div class="flex justify-center mt-2 items-center border-b pb-1">
-                <div class="flex justify-center items-center w-1/4 text-center">
-                    <img src="{% static 'home/images/product 1.jpg' %}" alt="" class="w-1/2">
-                    <h2 class="">Arm Chair</h2>
-                </div>
-                <div class="flex justify-center items-center gap-1 w-1/4 text-center">
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">-</button>
-                    <h2 class="font-semibold">2</h2>
-                    <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">+</button>
-                </div>
-                <h2 class="w-1/4 text-center">400</h2>
-                <h2 class="w-1/4 text-center">800</h2>
-            </div>
+            {% endfor %}
+
         </div>
         <div class="w-full lg:w-2/5">
             <div class=" sticky top-20">
                 <h2 class="text-xl font-semibold border-b-2 pb-1">Order Summery</h2>
                 <div class="flex justify-between px-8 mt-4">
                     <h2 class="font-semibold">Total:</h2>
-                    <span class="">5000</span>
+                    <span class="">{{ order.get_totals }}</span>
                 </div>
                 <div class="flex justify-between px-8 mt-4">
                     <h2 class="font-semibold">Discount:</h2>
@@ -165,7 +51,8 @@
                 <div class="px-8 my-10">
                     <form action="" class="flex flex-col gap-2" method="POST">
                         <label class="" for="coupon">Coupon:</label>
-                        <input type="text" class="border px-4 py-3 focus:outline-none" placeholder="Coupon" id="coupon" name="coupon">
+                        <input type="text" class="border px-4 py-3 focus:outline-none" placeholder="Coupon" id="coupon"
+                               name="coupon">
                         {% csrf_token %}
                         <button class="bg-yellow-400 px-4 py-3 rounded" type="submit">Add Coupon</button>
                     </form>

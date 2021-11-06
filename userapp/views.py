@@ -5,6 +5,8 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from userapp.forms import LoginForm, RegistrationForm, EditProfileForm, EditShippingAddressForm, EditBillingAddressForm
 from productapp.models import WishList
+from purchaseapp.models import Cart, Order
+
 
 # Create your views here.
 def login_executed(redirect_to):
@@ -149,9 +151,13 @@ def wishlistView(request):
     }
     return render(request, 'home/wishlist.html', context)
 
+
 @login_required
 def cartView(request):
+    carts = Cart.objects.filter(user=request.user)
+    order = Order.objects.get(user=request.user, is_ordered=False)
     context = {
-
+        'carts': carts,
+        'order': order,
     }
     return render(request, 'home/cart.html', context)
