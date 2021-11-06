@@ -61,12 +61,12 @@
                                 <img src="{{ product.image.url }}" alt="" class="">
                                 <div class="absolute top-0 left-0 bg-yellow-500 px-5 text-white">{{ product.product_discount }}%</div>
                                 <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                                    <a href="" data-tootik="Add to Cart"><i
+                                    <a href="{% url 'purchase_app:add_to_cart' product_slug=product.product_slug %}" data-tootik="Add to Cart"><i
                                             class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
                                     <a href="{% url "product_details_app:product" product_slug=product.product_slug %}"
                                        data-tootik="View Details"><i
                                             class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                                    <a href="" data-tootik="Add to Wishlist"><i
+                                    <a href="{% url 'product_details_app:add_to_wishlist' product_slug=product.product_slug %}" data-tootik="Add to Wishlist"><i
                                             class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
                                 </div>
                             </div>
@@ -101,12 +101,12 @@
                                 <img src="{{ product.image.url }}" alt="" class="">
                                 <div class="absolute top-0 left-0 bg-yellow-500 px-5 text-white">{{ product.product_discount }}%</div>
                                 <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                                    <a href="" data-tootik="Add to Cart"><i
+                                    <a href="{% url 'purchase_app:add_to_cart' product_slug=product.product_slug %}" data-tootik="Add to Cart"><i
                                             class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
                                     <a href="{% url "product_details_app:product" product_slug=product.product_slug %}"
                                        data-tootik="View Details"><i
                                             class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                                    <a href="" data-tootik="Add to Wishlist"><i
+                                    <a href="{% url 'product_details_app:add_to_wishlist' product_slug=product.product_slug %}" data-tootik="Add to Wishlist"><i
                                             class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
                                 </div>
                             </div>
@@ -141,12 +141,12 @@
                                 <img src="{{ product.image.url }}" alt="" class="">
                                 <div class="absolute top-0 left-0 bg-yellow-500 px-5 text-white">{{ product.product_discount }}%</div>
                                 <div class="absolute top-3/4 grid place-items-center grid-flow-col w-full lg:opacity-0 group-hover:opacity-100 transition-all">
-                                    <a href="" data-tootik="Add to Cart"><i
+                                    <a href="{% url 'purchase_app:add_to_cart' product_slug=product.product_slug %}" data-tootik="Add to Cart"><i
                                             class="fal fa-shopping-bag text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
                                     <a href="{% url "product_details_app:product" product_slug=product.product_slug %}"
                                        data-tootik="View Details"><i
                                             class="fal fa-eye text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
-                                    <a href="" data-tootik="Add to Wishlist"><i
+                                    <a href="{% url 'product_details_app:add_to_wishlist' product_slug=product.product_slug %}" data-tootik="Add to Wishlist"><i
                                             class="fal fa-heart text-white bg-gray-700 rounded-md p-3 hover:bg-gray-900 transition-all duration-300"></i></a>
                                 </div>
                             </div>

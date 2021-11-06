@@ -101,7 +101,7 @@
                 <a href="{% url 'product_details_app:add_to_wishlist' product_slug=product.product_slug %}"
                    class="py-3 px-4 bg-yellow-400 rounded text-white flex gap-2 items-center justify-center w-full"
                    data-tootik="Add to Wishlist"><i class="fa fa-heart"></i><span class="">Add to Wishlish</span></a>
-                <a href=""
+                <a href="{% url 'purchase_app:add_to_cart' product_slug=product.product_slug %}"
                    class="py-3 px-4 bg-gray-800 rounded text-white flex gap-2 items-center justify-center w-full"
                    data-tootik="Add to Cart"><i class="fa fa-shopping-bag"></i><span class="">Add to Cart</span></a>
             </div>
