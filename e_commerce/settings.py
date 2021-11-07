@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'productapp',
     'profileapp',
     'purchaseapp',
+    'apiapp',
 
     'crispy_forms',
     'crispy_tailwind',

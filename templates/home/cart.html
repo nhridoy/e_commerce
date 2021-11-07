@@ -11,24 +11,31 @@
                 <h2 class="text-xl">{{ carts.count }} Items</h2>
             </div>
             <div class="flex justify-center mt-1">
-                <h2 class="w-1/4 text-center font-bold">Product Details</h2>
-                <h2 class="w-1/4 text-center font-bold">Quantity</h2>
-                <h2 class="w-1/4 text-center font-bold">Price</h2>
-                <h2 class="w-1/4 text-center font-bold">Total</h2>
+                <h2 class="w-1/5 text-center font-bold">Product Details</h2>
+                <h2 class="w-1/5 text-center font-bold">Quantity</h2>
+                <h2 class="w-1/5 text-center font-bold">Price</h2>
+                <h2 class="w-1/5 text-center font-bold">Total</h2>
+                <h2 class="w-1/5 text-center font-bold">Remove</h2>
             </div>
             {% for cart in carts %}
                 <div class="flex justify-center mt-2 items-center border-b pb-1">
-                    <div class="flex justify-center items-center w-1/4 text-center">
+                    <div class="flex justify-center items-center w-1/5 text-center">
                         <img src="{{ cart.product.image.url }}" alt="{{ cart.product.product_name }}" class="w-1/2">
                         <h2 class="">{{ cart.product.product_name }}</h2>
                     </div>
-                    <div class="flex justify-center items-center gap-1 w-1/4 text-center">
-                        <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">-</button>
+                    <div class="flex justify-center items-center gap-1 w-1/5 text-center">
+                        <a href="{% url 'purchase_app:minus_to_cart' product_slug=cart.product.product_slug %}"
+                           class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">-</a>
                         <h2 class="font-semibold">{{ cart.quantity }}</h2>
-                        <button class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">+</button>
+                        <a href="{% url 'purchase_app:plus_to_cart' product_slug=cart.product.product_slug %}"
+                           class="bg-yellow-400 px-2 py-1 font-bold rounded-full" type="submit">+</a>
                     </div>
-                    <h2 class="w-1/4 text-center">{{ cart.product.product_new_price }}</h2>
-                    <h2 class="w-1/4 text-center">{{ cart.get_total }}</h2>
+                    <h2 class="w-1/5 text-center">{{ cart.product.product_new_price }}</h2>
+                    <h2 class="w-1/5 text-center">{{ cart.get_total }}</h2>
+                    <div class="w-1/5 text-center"><a href="{% url 'purchase_app:remove_from_cart' cart_id=cart.id %}"
+                                              class="bg-red-400 hover:bg-red-500 focus:bg-red-500 focus:outline-none text-white px-2 py-1 rounded"
+                                              data-tootik="Remove From Cart"><i class="fal fa-trash"></i></a></div>
+
                 </div>
             {% endfor %}
 
@@ -58,7 +65,7 @@
                     </form>
                 </div>
                 <div class="flex flex-col md:flex-row justify-between gap-2 px-8 mt-4">
-                    <a href="" class="bg-gray-800 text-white px-4 py-3 w-full text-center rounded">Continue Shopping</a>
+                    <a href="{% url 'ecom_app:index' %}" class="bg-gray-800 text-white px-4 py-3 w-full text-center rounded">Continue Shopping</a>
                     <a href="" class="bg-yellow-400 px-4 py-3 w-full text-center rounded">Checkout</a>
                 </div>
             </div>

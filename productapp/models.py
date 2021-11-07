@@ -3,7 +3,6 @@ from ecomapp.models import Category, SubCategory, Company
 from userapp.models import User
 import uuid
 from django.db.models import Avg
-from multiselectfield import MultiSelectField
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver

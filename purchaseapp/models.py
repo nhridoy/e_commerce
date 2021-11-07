@@ -32,7 +32,6 @@ class Order(models.Model):
 
     def get_totals(self):
         total = 0
-        print(self.cart.all())
         for item in self.cart.all():
-            total += float(total+item.get_total())
+            total += item.get_total()
         return total
