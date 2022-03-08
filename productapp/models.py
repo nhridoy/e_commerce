@@ -60,7 +60,7 @@ class Product(models.Model):
     product_colors = models.ManyToManyField(Colors, verbose_name='Available Colors', blank=True)
     product_sizes = models.ManyToManyField(Sizes, verbose_name='Available Sizes', blank=True)
 
-    product_slug = models.SlugField(max_length=256, blank=True)
+    product_slug = models.SlugField(max_length=256, blank=True, unique=True)
 
     total_order = models.IntegerField(blank=True)
 

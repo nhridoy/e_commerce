@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
+    'rest_framework',
 ]
 # Crispy Form Settings
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
