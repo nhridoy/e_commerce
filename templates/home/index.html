@@ -719,46 +719,29 @@
                                 <span class="bg-yellow-400 p-3 text-white" id="modal__product_discount">%</span>
                             </div>
                             <hr>
-                            {% comment %}
-                            <h2 class="text-md font-bold text-xl pt-3">Options:</h2>
-                            {% if product.product_sizes.count > 0 %}
-                                <h2 class="text-md font-bold pt-3">Size:
-                                    <select name="size" id="size" class="border px-2 py-1">
-                                        {% for product_size in product.product_sizes.all %}
-                                            <option value="{{ product_size }}">{{ product_size }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </h2>
-                            {% endif %}
 
+                            <h2 class="text-md font-bold pt-3" id="productOption">
 
-                            {% if product.product_colors.count > 0 %}
-                                <h2 class="text-md font-bold pt-3">Color:
-                                    <select name="color" id="color" class="border px-2 py-1">
-                                        {% for product_color in product.product_colors.all %}
-                                            <option value="{{ product_color }}">{{ product_color }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </h2>
-                            {% endif %}
+                            </h2>
+
 
                             <h2 class="text-md font-bold pt-3">Quantity:
                                 <input type="number" min="1" class="border px-2 py-1" value="1">
                             </h2>
                             <div class="flex pt-3 gap-4 flex-col xl:flex-row text-center">
-                                <a href="{% url 'product_details_app:add_to_wishlist' product_slug=product.product_slug %}"
+                                <a href=""
                                    class="py-3 px-4 bg-yellow-400 rounded text-white flex gap-2 items-center justify-center w-full"
-                                   data-tootik="Add to Wishlist"><i class="fa fa-heart"></i><span class="">Add to Wishlish</span></a>
-                                <a href="{% url 'purchase_app:add_to_cart' product_slug=product.product_slug %}"
+                                   data-tootik="Add to Wishlist" id="wishlistLink"><i class="fa fa-heart"></i><span class="">Add to Wishlish</span></a>
+                                <a href=""
                                    class="py-3 px-4 bg-gray-800 rounded text-white flex gap-2 items-center justify-center w-full"
-                                   data-tootik="Add to Cart"><i class="fa fa-shopping-bag"></i><span class="">Add to Cart</span></a>
+                                   data-tootik="Add to Cart" id="cartLink"><i class="fa fa-shopping-bag"></i><span class="">Add to Cart</span></a>
                             </div>
-                        {% endcomment %}
+
                         </div>
                     </div>
                 </main>
                 <footer class="modal__footer">
-                    <button class="modal__btn modal__btn-primary">Continue</button>
+                    <a href="" class="modal__btn modal__btn-primary" id="modal__view_details">View Details</a>
                     <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close
                     </button>
                 </footer>
@@ -818,6 +801,30 @@
                         availibility.classList.add('text-red-600')
                         availibility.innerText = 'Out Of Stock'
                     }
+                    const productOption = (type, data) => {
+                        const h2 = document.getElementById('productOption')
+                        h2.innerText = `${type.toString().charAt(0).toUpperCase() + type.slice(1)}: `
+                        const select = document.createElement('select')
+                        select.setAttribute('name', type)
+                        select.setAttribute('id', type)
+                        select.setAttribute('class', 'border px-2 py-1')
+                        data.forEach((itm, i) => {
+                            const option = document.createElement('option')
+                            option.setAttribute('value', itm.id)
+                            option.innerText = itm.color
+                            select.appendChild(option)
+                        })
+                        h2.appendChild(select)
+                    }
+                    if (data.product_colors.length > 0) {
+                        productOption('color', data.product_colors)
+                    } else if (data.product_sizes.length > 0) {
+                        productOption('size', data.product_sizes)
+                    }
+
+                    document.getElementById('wishlistLink').setAttribute('href', `/product/add_to_wishlist/${data.product_slug}`)
+                    document.getElementById('cartLink').setAttribute('href', `/purchase/add/${data.product_slug}`)
+                    document.getElementById('modal__view_details').setAttribute('href', `/product/${data.product_slug}`)
                 }
             })
 
