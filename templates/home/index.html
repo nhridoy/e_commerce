@@ -686,9 +686,10 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+    <div class="modal micromodal-slide" style="font-family: 'Poppins', sans-serif;" id="modal-1" aria-hidden="true">
         <div class="modal__overlay z-20" tabindex="-1" data-micromodal-close>
-            <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+            <div class="modal__container" style="max-width: 70vw;" role="dialog" aria-modal="true"
+                 aria-labelledby="modal-1-title">
                 <header class="modal__header">
                     <h2 class="modal__title" id="modal-1-title">
                         Quick View
@@ -703,21 +704,14 @@
                         </div>
                         <div class="col-span-2 border rounded-md p-4">
                             <h2 class="font-bold text-2xl" id="modal__product_name"></h2>
-                            <div class="flex items-center gap-2 pt-3 text-yellow-400">
-                                {% comment %}{% for star in product.avg_rating|times %}
-                                    <i class="fa fa-star"></i>
-                                {% endfor %}
-                                {% for star in product.avg_rating|sub %}
-                                    <i class="fal fa-star"></i>
-                                {% endfor %}{% endcomment %}
-                                <h2 class="text-black text-lg">Total Ratings: <span id="modal__product_rating"></span>
-                                </h2>
-                            </div>
+                            <div class="flex items-center gap-2 pt-3 text-yellow-400" id="modal__product_stars"></div>
+                            <h2 class="text-black text-lg mt-2">Total Ratings: <span id="modal__product_rating"></span>
+                            </h2>
                             <h2 class="text-md font-bold pt-3">Brand: <span class="text-blue-400 font-normal"><a
                                     href="" id="modal__product_brand"></a></span>
                             </h2>
                             <h2 class="text-md font-bold pt-3">Availability:
-                                <span class="text-yellow-600 font-normal" id="modal__product_availibility"></span>
+                                <span class="font-normal" id="modal__product_availibility"></span>
                             </h2>
                             <div class="py-3 flex items-center gap-4">
                                 <span class="text-3xl text-red-600" id="modal__product_new_price">৳</span>
@@ -788,19 +782,43 @@
                 fetch(`http://127.0.0.1:8000/api/product/${product}/`)
                     .then(res => res.json())
                     .then(data => showDataInModal(data))
+                // Adding Data in Modal
                 const showDataInModal = (data) => {
                     console.log(data)
                     document.getElementById('modal-1-title').innerText = data.product_name;
                     document.getElementById('modal__product_image').setAttribute('src', data.image);
                     document.getElementById('modal__product_name').innerText = data.product_name
-                    document.getElementById('modal__product_rating').innerText = data.product_name
-                    document.getElementById('modal__product_brand').innerText = data.product_name
-                    document.getElementById('modal__product_new_price').innerText = data.product_new_price
-                    document.getElementById('modal__product_price').innerText = data.product_price
-                    document.getElementById('modal__product_discount').innerText = data.product_discount
-                    data.product_quantity > 0 ? document.getElementById('modal__product_availibility').innerText = 'In Stock' : document.getElementById('modal__product_availibility').innerText = 'Out Of Stock'
+                    document.getElementById('modal__product_rating').innerText = data.total_rating_count
+                    const stars = document.getElementById('modal__product_stars')
+                    const starCreate = (avg_rating) => {
+                        stars.innerHTML = ''
+                        for (let i = 1; i <= avg_rating; i++) {
+                            const star = document.createElement('i')
+                            star.setAttribute('class', 'fa fa-star')
+                            stars.appendChild(star)
+                        }
+                        for (let i = 1; i <= 5 - avg_rating; i++) {
+                            const star = document.createElement('i')
+                            star.setAttribute('class', 'fal fa-star')
+                            stars.appendChild(star)
+                        }
+                    }
+                    starCreate(data.avg_rating)
+
+                    document.getElementById('modal__product_brand').innerText = data.company_name
+                    document.getElementById('modal__product_brand').setAttribute('href', `/all/${data.company_name.toString().toLowerCase().replace(' ', '_')}/`)
+                    document.getElementById('modal__product_new_price').innerText = `৳${data.product_new_price}`
+                    document.getElementById('modal__product_price').innerText = `৳${data.product_price}`
+                    document.getElementById('modal__product_discount').innerText = `%${data.product_discount}`
+                    const availibility = document.getElementById('modal__product_availibility');
+                    if (data.product_quantity > 0) {
+                        availibility.classList.add('text-yellow-600')
+                        availibility.innerText = 'In Stock'
+                    } else {
+                        availibility.classList.add('text-red-600')
+                        availibility.innerText = 'Out Of Stock'
+                    }
                 }
-                {#document.querySelector('.modal__content').innerHTML = product;#}
             })
 
         })
