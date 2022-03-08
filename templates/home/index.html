@@ -696,10 +696,16 @@
                     <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
                 </header>
                 <main class="modal__content" id="modal-1-content">
-                    <p>
-                        Try hitting the <code>tab</code> key and notice how the focus stays within the modal itself.
-                        Also, <code>esc</code> to close modal.
-                    </p>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="col-span-1">
+                            <img src="" alt="" id="modal__product_image" class="object-cover rounded-lg border-2 border-rose-500">
+                        </div>
+                        <div class="col-span-2">
+                            <p class="font-bold">Price: <span class="text-yellow-700" id="modal__product_price"></span></p>
+                            <p class="font-bold">Brand: <span class="text-yellow-700" id="modal__product_brand"></span></p>
+                            <p class="font-bold">Brand: <span class="text-yellow-700" id="modal__product_brand"></span></p>
+                        </div>
+                    </div>
                 </main>
                 <footer class="modal__footer">
                     <button class="modal__btn modal__btn-primary">Continue</button>
@@ -723,7 +729,15 @@
         item.forEach((item, index) => {
             item.addEventListener('click', (e) => {
                 let product = e.target.parentElement.getAttribute('data-id')
-                document.querySelector('.modal__content').innerHTML = product;
+                fetch(`http://127.0.0.1:8000/api/product/${product}/`)
+                .then(res => res.json())
+                .then(data => showDataInModal(data))
+                const showDataInModal = (data) => {
+                    console.log(data)
+                  document.getElementById('modal-1-title').innerText = data.product_name;
+                  document.getElementById('modal__product_image').setAttribute('src', data.image);
+                }
+                {#document.querySelector('.modal__content').innerHTML = product;#}
             })
 
         })
