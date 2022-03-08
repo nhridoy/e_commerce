@@ -9,7 +9,10 @@ from django.contrib.auth.decorators import login_required
 
 def productDetailsView(request, product_slug):
     product = Product.objects.get(product_slug=product_slug)
-    user_ratings = Rating.objects.filter(user=request.user).values_list('product', flat=True)
+    try:
+        user_ratings = Rating.objects.filter(user=request.user).values_list('product', flat=True)
+    except:
+        pass
     if request.method == 'POST':
         star = int(request.POST.get('rating'))
         comment = request.POST.get('review')
@@ -17,10 +20,15 @@ def productDetailsView(request, product_slug):
         rate.save()
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
         # return HttpResponseRedirect(request.path_info)
-    context = {
-        'product': product,
-        'user_ratings': user_ratings,
-    }
+    try:
+        context = {
+            'product': product,
+            'user_ratings': user_ratings,
+        }
+    except:
+        context = {
+            'product': product,
+        }
     return render(request, 'home/product-details.html', context)
 
 

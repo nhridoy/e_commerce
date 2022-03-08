@@ -698,12 +698,68 @@
                 <main class="modal__content" id="modal-1-content">
                     <div class="grid grid-cols-3 gap-4">
                         <div class="col-span-1">
-                            <img src="" alt="" id="modal__product_image" class="object-cover rounded-lg border-2 border-rose-500">
+                            <img src="" alt="" id="modal__product_image"
+                                 class="object-cover rounded-lg border-2 border-rose-500">
                         </div>
-                        <div class="col-span-2">
-                            <p class="font-bold">Price: <span class="text-yellow-700" id="modal__product_price"></span></p>
-                            <p class="font-bold">Brand: <span class="text-yellow-700" id="modal__product_brand"></span></p>
-                            <p class="font-bold">Brand: <span class="text-yellow-700" id="modal__product_brand"></span></p>
+                        <div class="col-span-2 border rounded-md p-4">
+                            <h2 class="font-bold text-2xl" id="modal__product_name"></h2>
+                            <div class="flex items-center gap-2 pt-3 text-yellow-400">
+                                {% comment %}{% for star in product.avg_rating|times %}
+                                    <i class="fa fa-star"></i>
+                                {% endfor %}
+                                {% for star in product.avg_rating|sub %}
+                                    <i class="fal fa-star"></i>
+                                {% endfor %}{% endcomment %}
+                                <h2 class="text-black text-lg">Total Ratings: <span id="modal__product_rating"></span>
+                                </h2>
+                            </div>
+                            <h2 class="text-md font-bold pt-3">Brand: <span class="text-blue-400 font-normal"><a
+                                    href="" id="modal__product_brand"></a></span>
+                            </h2>
+                            <h2 class="text-md font-bold pt-3">Availability:
+                                <span class="text-yellow-600 font-normal" id="modal__product_availibility"></span>
+                            </h2>
+                            <div class="py-3 flex items-center gap-4">
+                                <span class="text-3xl text-red-600" id="modal__product_new_price">৳</span>
+                                <span class="text-3xl text-red-300 line-through" id="modal__product_price">৳</span>
+                                <span class="bg-yellow-400 p-3 text-white" id="modal__product_discount">%</span>
+                            </div>
+                            <hr>
+                            {% comment %}
+                            <h2 class="text-md font-bold text-xl pt-3">Options:</h2>
+                            {% if product.product_sizes.count > 0 %}
+                                <h2 class="text-md font-bold pt-3">Size:
+                                    <select name="size" id="size" class="border px-2 py-1">
+                                        {% for product_size in product.product_sizes.all %}
+                                            <option value="{{ product_size }}">{{ product_size }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </h2>
+                            {% endif %}
+
+
+                            {% if product.product_colors.count > 0 %}
+                                <h2 class="text-md font-bold pt-3">Color:
+                                    <select name="color" id="color" class="border px-2 py-1">
+                                        {% for product_color in product.product_colors.all %}
+                                            <option value="{{ product_color }}">{{ product_color }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </h2>
+                            {% endif %}
+
+                            <h2 class="text-md font-bold pt-3">Quantity:
+                                <input type="number" min="1" class="border px-2 py-1" value="1">
+                            </h2>
+                            <div class="flex pt-3 gap-4 flex-col xl:flex-row text-center">
+                                <a href="{% url 'product_details_app:add_to_wishlist' product_slug=product.product_slug %}"
+                                   class="py-3 px-4 bg-yellow-400 rounded text-white flex gap-2 items-center justify-center w-full"
+                                   data-tootik="Add to Wishlist"><i class="fa fa-heart"></i><span class="">Add to Wishlish</span></a>
+                                <a href="{% url 'purchase_app:add_to_cart' product_slug=product.product_slug %}"
+                                   class="py-3 px-4 bg-gray-800 rounded text-white flex gap-2 items-center justify-center w-full"
+                                   data-tootik="Add to Cart"><i class="fa fa-shopping-bag"></i><span class="">Add to Cart</span></a>
+                            </div>
+                        {% endcomment %}
                         </div>
                     </div>
                 </main>
@@ -730,12 +786,19 @@
             item.addEventListener('click', (e) => {
                 let product = e.target.parentElement.getAttribute('data-id')
                 fetch(`http://127.0.0.1:8000/api/product/${product}/`)
-                .then(res => res.json())
-                .then(data => showDataInModal(data))
+                    .then(res => res.json())
+                    .then(data => showDataInModal(data))
                 const showDataInModal = (data) => {
                     console.log(data)
-                  document.getElementById('modal-1-title').innerText = data.product_name;
-                  document.getElementById('modal__product_image').setAttribute('src', data.image);
+                    document.getElementById('modal-1-title').innerText = data.product_name;
+                    document.getElementById('modal__product_image').setAttribute('src', data.image);
+                    document.getElementById('modal__product_name').innerText = data.product_name
+                    document.getElementById('modal__product_rating').innerText = data.product_name
+                    document.getElementById('modal__product_brand').innerText = data.product_name
+                    document.getElementById('modal__product_new_price').innerText = data.product_new_price
+                    document.getElementById('modal__product_price').innerText = data.product_price
+                    document.getElementById('modal__product_discount').innerText = data.product_discount
+                    data.product_quantity > 0 ? document.getElementById('modal__product_availibility').innerText = 'In Stock' : document.getElementById('modal__product_availibility').innerText = 'Out Of Stock'
                 }
                 {#document.querySelector('.modal__content').innerHTML = product;#}
             })
