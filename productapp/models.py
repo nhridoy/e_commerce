@@ -10,11 +10,11 @@ from django.dispatch import receiver
 
 # Create your models here.
 def image_dir(self, filepath):
-    return f'product/{self.product.product_name}/{"product_name.jpg"}'
+    return f'product/{self.product.product_name}/product_name.jpg'
 
 
 def default_profile_image():
-    return f"image.png"
+    return "image.png"
 
 
 class Colors(models.Model):
@@ -73,10 +73,7 @@ class Product(models.Model):
 
     @property
     def total_rating_count(self):
-        if self.product_ratings.all().count() > 0:
-            return self.product_ratings.all().count()
-        else:
-            return 0
+        return max(self.product_ratings.all().count(), 0)
 
     def save(self, *args, **kwargs):
         self.product_new_price = self.product_price - (self.product_price * self.product_discount) / 100

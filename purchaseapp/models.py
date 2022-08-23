@@ -31,7 +31,4 @@ class Order(models.Model):
         return f'{self.user.user_profile.full_name}s order {self.pk}'
 
     def get_totals(self):
-        total = 0
-        for item in self.cart.all():
-            total += item.get_total()
-        return total
+        return sum(item.get_total() for item in self.cart.all())

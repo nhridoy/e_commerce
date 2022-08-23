@@ -13,14 +13,13 @@ def addToCartView(request, product_slug):
     if current_order[1]:
         current_order[0].cart.add(new_cart[0])
         current_order[0].save()
-    else:
-        if not current_order[0].cart.filter(product=current_product).exists():
-            current_order[0].cart.add(new_cart[0])
-            current_order[0].save()
-        else:
-            new_cart[0].quantity += 1
-            new_cart[0].save()
+    elif current_order[0].cart.filter(product=current_product).exists():
+        new_cart[0].quantity += 1
+        new_cart[0].save()
 
+    else:
+        current_order[0].cart.add(new_cart[0])
+        current_order[0].save()
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 

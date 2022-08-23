@@ -27,8 +27,7 @@ def adminloginview(request):
         email = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(username=email, password=password)
-        if user:
+        if user := authenticate(username=email, password=password):
             if user.is_active:
                 if user.is_staff and user.is_superuser:
                     login(request, user)
@@ -349,7 +348,7 @@ def addproductsview(request):
             pro_sizes = Sizes.objects.get(pk=size)
             product_obj.product_sizes.add(pro_sizes)
 
-        for file_num in range(0, int(length)):
+        for file_num in range(int(length)):
             ProductImages.objects.create(
                 product=product_obj,
                 product_image=request.FILES.get(f'images{file_num}')
@@ -359,11 +358,11 @@ def addproductsview(request):
             # print(product_image)
 
         images = request.FILES.get('images')
-        # print(request.POST)
-        # print(length)
-        # print(images)
+            # print(request.POST)
+            # print(length)
+            # print(images)
 
-        # return None
+            # return None
     context = {
         'form': form,
         'inlineform': inlineforms(),
@@ -420,9 +419,10 @@ def editproductsview(request, product_pk):
     colors = Colors.objects.all()
     sizes = Sizes.objects.all()
     form = EditProductForm(instance=current_product)
-    form2 = []
-    for current_product_image in current_product_images:
-        form2.append(EditProductImagesForm(instance=current_product_image))
+    form2 = [
+        EditProductImagesForm(instance=current_product_image)
+        for current_product_image in current_product_images
+    ]
 
     if request.method == 'POST':
         form = EditProductForm(request.POST, request.FILES, instance=current_product)
@@ -481,9 +481,11 @@ def editproductsimageview(request, product_pk):
     current_product = Product.objects.get(pk=product_pk)
     current_product_images = ProductImages.objects.filter(product=current_product)
     # form = EditProductImagesForm(instance=current_product_images)
-    form = []
-    for current_product_image in current_product_images:
-        form.append(EditProductImagesForm(instance=current_product_image))
+    form = [
+        EditProductImagesForm(instance=current_product_image)
+        for current_product_image in current_product_images
+    ]
+
     print(form)
     if request.method == 'POST':
         print(request.FILES)

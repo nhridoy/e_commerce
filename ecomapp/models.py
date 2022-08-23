@@ -28,7 +28,7 @@ class SubCategory(models.Model):
 
 
 def image_directory(self, filepath):
-    return f'company/{self.company_name}/{"company_logo.png"}'
+    return f'company/{self.company_name}/company_logo.png'
 
 
 class Company(models.Model):

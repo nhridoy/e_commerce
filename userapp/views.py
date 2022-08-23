@@ -52,8 +52,7 @@ def loginView(request):
     if request.method == 'POST':
         form = LoginForm(data=request.POST)
         username, password = request.POST.get('username'), request.POST.get('password')
-        user = authenticate(username=username, password=password)
-        if user:
+        if user := authenticate(username=username, password=password):
             if user.is_active:
                 login(request, user)
                 if next_page:
